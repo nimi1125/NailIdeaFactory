@@ -1,0 +1,21 @@
+/* 共通 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Pattaya&display=swap');
+
+.pattayaRegular {
+    font-family: "Pattaya", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+body{
+    color: #333;
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+}
+
