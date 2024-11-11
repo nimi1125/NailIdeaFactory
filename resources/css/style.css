@@ -1,7 +1,7 @@
 /* 共通 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Pattaya&display=swap');
 
-.pattayaRegular {
+.pattaya {
     font-family: "Pattaya", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -19,3 +19,61 @@ img{
     height: auto;
 }
 
+.titH3{
+    font-size: 2rem;
+}
+
+.bodyBg{
+    background-color: #d8dee0;
+}
+
+.bg01{
+    background-color: #0c8aac;
+}
+
+.bg02{
+    background-color: #9ab9c1;
+}
+
+.btn01{
+    display: inline-block;
+    border: solid 2px #fff;
+    border-radius: 25px;
+    padding: 10px 25px;
+    color: #fff;
+    background-color: #0c8aac;
+}
+
+.btn01:hover{
+    background: #fff;
+    color: #0c8aac;
+}
+
+.btn02{
+    display: inline-block;
+    border: solid 2px #0c8aac;
+    border-radius: 25px;
+    padding: 10px 25px;
+    color: #0c8aac;
+    background-color: #fff;
+}
+
+.btn02:hover{
+    background: #0c8aac;
+    color: #fff;
+}
+
+.hedTit{
+    font-size: 2rem;
+}
+
+.topCvArea{
+    height: 50vh;
+}
+
+
+@media screen and (min-width: 768px){
+    .topCvArea{
+        height: 100vh;
+    }
+}
