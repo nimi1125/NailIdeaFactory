@@ -1,6 +1,18 @@
 <x-app-layout>
     <div class="py-12">
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
+            <h3 class="titH3 pattaya">profile <span class="text-sm">ネイルアイディア</span></h3>
+            <div class="flex flex-wrap">
+                <div class="w-full p-2">
+                    <a class="flex flex-col items-center bg-white rounded p-3.5">
+                        <img src="{{ asset('img/quill_pen_icon.png') }}" alt="羽ペン" class="mx-auto">
+                        <p class="text-2xl mt-2 pattaya">profile</p>
+                        <p class="text-l">アカウント情報変更</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 mt-5">
             <h3 class="titH3 pattaya">Nail idea <span class="text-sm">ネイルアイディア</span></h3>
             <div class="flex flex-wrap">
                 <div class="md:w-1/2 w-full p-2">

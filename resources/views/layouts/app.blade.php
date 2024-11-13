@@ -20,8 +20,9 @@
 
             <!-- Page Heading -->
             @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <header class="relative inrCvHi">
+                    <img src="{{ asset('img/inr_cv.jpg') }}" alt="カバー画像" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
                 </header>
