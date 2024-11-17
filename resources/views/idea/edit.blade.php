@@ -1,12 +1,17 @@
 <x-app-layout>
+    <x-slot name="cover">
+        <h2 class="font-semibold text-white leading-tight pattaya titH2">
+            Idea Edit
+        </h2>
+    </x-slot>
     <div class="py-12">
         <div class="max-w-6xl mx-auto">
-        <h3 class="titH3 pattaya mb-3">New Idea Recored</h3>
+        <h3 class="titH3 mb-3">編集</h3>
         </div>
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 py-12 bg-white rounded-md">
-            <form method="POST" action="{{ route('register') }}">
-                @csrf
-                
+            <form method="post" action="" enctype="multipart/form-data" class="space-y-5 mt-5">
+                @csrf  
+                @include('idea.ideaform')
             </form>
         </div>
     </div>

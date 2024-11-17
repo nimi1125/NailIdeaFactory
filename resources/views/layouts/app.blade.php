@@ -19,13 +19,13 @@
             @include('layouts.navigation')
 
             <!-- Page Heading -->
-            @isset($header)
-                <header class="relative inrCvHi">
+            @isset($cover)
+                <div class="relative inrCvHi">
                     <img src="{{ asset('img/inr_cv.jpg') }}" alt="カバー画像" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
+                    <div class="absolute flex items-center inset-0 max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                        {{ $cover }}
                     </div>
-                </header>
+                </div>
             @endisset
 
             <!-- Page Content -->

@@ -1,4 +1,9 @@
 <x-app-layout>
+    <x-slot name="cover">
+        <h2 class="font-semibold text-white leading-tight pattaya titH2">
+            MyIdea
+        </h2>
+    </x-slot>
     <div class="py-12">
         <div class="max-w-6xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-5">

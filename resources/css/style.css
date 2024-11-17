@@ -7,9 +7,15 @@
     font-style: normal;
 }
 
+.notoSerifJp {
+    font-family: "Noto Serif JP", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+  }
+
 body{
     color: #333;
-    font-family: "Noto Sans JP", sans-serif;
+    font-family: "Noto Sans JP", serif;
     font-weight: normal;
     font-style: normal;
 }
@@ -17,6 +23,10 @@ body{
 img{
     max-width: 100%;
     height: auto;
+}
+
+.hedTit{
+    font-size: 2.4rem;
 }
 
 .titH2{
@@ -67,10 +77,6 @@ img{
     color: #fff;
 }
 
-.hedTit{
-    font-size: 2rem;
-}
-
 .topCvArea{
     height: 50vh;
 }
@@ -88,6 +94,9 @@ img{
     right: 0;
     background: #020d1263;
 }
+
+
+
 
 @media screen and (min-width: 768px){
     .topCvArea{

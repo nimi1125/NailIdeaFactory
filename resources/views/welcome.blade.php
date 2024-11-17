@@ -9,8 +9,6 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-        <link rel="stylesheet" href="resources/css/style.css">
     
         <!-- Styles / Scripts -->
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
@@ -64,7 +62,7 @@
         </header>
     
         <!-- メインコンテンツ -->
-        <main class="max-w-2xl px-6 lg:max-w-7xl w-full pt-20 pb-20 mx-auto">
+        {{-- <main class="max-w-2xl px-6 lg:max-w-7xl w-full pt-20 pb-20 mx-auto">
             <section>
                 <h3 class="md:text-5xl">Nail Idea Factoryとは</h3>
                 <p class="mt-5 md:text-3xl">
@@ -76,6 +74,6 @@
                     <a href="{{ route('register') }}" class="btn02 ml-3">Register</a>
                 </div>
             </section>
-        </main>
+        </main> --}}
     </body>
 </html>
