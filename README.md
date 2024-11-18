@@ -2,9 +2,7 @@
 ## 使用技術一覧
 <p style="display: inline">
   <!-- フロントエンドのフレームワーク一覧 -->
-  <img src="https://img.shields.io/badge/-Node.js-000000.svg?logo=node.js&style=for-the-badge">
   <img src="https://img.shields.io/badge/-Next.js-000000.svg?logo=next.js&style=for-the-badge">
-  <img src="https://img.shields.io/badge/-TailwindCSS-000000.svg?logo=tailwindcss&style=for-the-badge">
   <!-- バックエンドのフレームワーク一覧 -->
   <img src="https://img.shields.io/badge/-Laravel-f3a68c.svg?logo=laravel&style=for-the-badge">
   <!-- バックエンドの言語一覧 -->
@@ -20,7 +18,10 @@
 さまざまなネイルのデザインに挑戦したいので、日々、InstagramやXなど各SNSの投稿でデザインの参考になりそうなものは、投稿を保存しておいたり、画像検索などで見つけた参考画像などを保存しておいたりしています。
 ただ、それではデザインを残しておく場所が複数あり、画像を探す手間があります。それらをひとまとめにして簡単に管理できるメモアプリがあれば便利だと感じ、このアプリの開発に至りました。
 
-### アプリ表示側イメージ(画像を追加)
+### アプリ表示側イメージ
+![スクリーンショット 2024-11-18 23 59 47](https://github.com/user-attachments/assets/334bb3fd-886d-4780-aeb2-129706933b95)
+![localhost_dashboard](https://github.com/user-attachments/assets/c5c032fa-ee58-4ea9-99e7-63a2e39d5407)
+![スクリーンショット 2024-11-19 0 00 17](https://github.com/user-attachments/assets/fc875aa0-95de-49da-9fda-85ecc55984b5)
 
 ### アプリURL
 #### URL　：
@@ -29,8 +30,6 @@
     ID:test@test.com
     PASS:12345test
 ~~~
-
-## 必要な環境変数やコマンド一覧
 
 ## ディレクトリ構成
 
@@ -86,5 +85,3 @@ docker run --rm \
 ./vendor/bin/sail　artisan db:seed
 ~~~
 
-
-## トラブルシューティング
