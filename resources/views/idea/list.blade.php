@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="cover">
         <h2 class="font-semibold text-white leading-tight pattaya titH2">
-            Post List
+            Idea List
         </h2>
     </x-slot>
     <div class="py-12">
