@@ -5,7 +5,7 @@
 　<img src="https://img.shields.io/badge/-HTML-99d1ce.svg?logo=&style=for-the-badge">
 　<img src="https://img.shields.io/badge/-CSS-1572B6.svg?logo=&style=for-the-badge">
   <!-- フロントエンドのフレームワーク一覧 -->
-  <img src="https://img.shields.io/badge/-Next.js-000000.svg?logo=next.js&style=for-the-badge">
+<!--   <img src="https://img.shields.io/badge/-Next.js-000000.svg?logo=next.js&style=for-the-badge"> -->
   <!-- バックエンドのフレームワーク一覧 -->
   <img src="https://img.shields.io/badge/-Laravel-f3a68c.svg?logo=laravel&style=for-the-badge">
   <!-- バックエンドの言語一覧 -->
@@ -27,7 +27,7 @@
 InstagramやX、画像検索で保存したネイルデザインをアプリ内でひとまとめに管理できます。
 
 ・カテゴリ分け
-カテゴリで、デザインを簡単に分類できます。（例：#フレンチネイル、#春ネイル）
+カテゴリで、デザインを簡単に分類できます。（例：フレンチネイル、ニュアンスネイル）
 
 ・ネイリストとの共有機能
 お気に入りのデザインを選んで、URLを共有することで、スムーズにデザインを伝えられます。
