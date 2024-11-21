@@ -2,14 +2,15 @@
 ## 使用技術一覧
 <p style="display: inline">
 　<!-- フロントエンドの言語一覧 -->
-　<img src="https://img.shields.io/badge/-HTML-99d1ce.svg?logo=&style=for-the-badge">
-　<img src="https://img.shields.io/badge/-CSS-1572B6.svg?logo=&style=for-the-badge">
+    <img src="https://img.shields.io/badge/-HTML-99d1ce.svg?logo=&style=for-the-badge">
+    <img src="https://img.shields.io/badge/-CSS-1572B6.svg?logo=&style=for-the-badge">
+    <img src="https://img.shields.io/badge/-Javascript-fff5a1.svg?logo=javascript&style=for-the-badge">
   <!-- フロントエンドのフレームワーク一覧 -->
 <!--   <img src="https://img.shields.io/badge/-Next.js-000000.svg?logo=next.js&style=for-the-badge"> -->
-  <!-- バックエンドのフレームワーク一覧 -->
-  <img src="https://img.shields.io/badge/-Laravel-f3a68c.svg?logo=laravel&style=for-the-badge">
   <!-- バックエンドの言語一覧 -->
   <img src="https://img.shields.io/badge/-Php-cccfff.svg?logo=php&style=for-the-badge">
+  <!-- バックエンドのフレームワーク一覧 -->
+  <img src="https://img.shields.io/badge/-Laravel-f3a68c.svg?logo=laravel&style=for-the-badge">
   <!-- ミドルウェア一覧 -->
   <img src="https://img.shields.io/badge/-MySQL-4479A1.svg?logo=mysql&style=for-the-badge&logoColor=white">
   <!-- インフラ一覧 -->
