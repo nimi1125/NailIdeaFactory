@@ -37,6 +37,10 @@ InstagramやX、画像検索で保存したネイルデザインをアプリ内�
 ・完成したネイルの投稿機能
 ネイルのデザインメモだけではなく、完成したものを共有できるような投稿機能を追加します。
 
+・お気に入り機能の追加
+
+・検索機能の追加
+
 ### アプリ表示側イメージ
 ![スクリーンショット 2024-11-18 23 59 47](https://github.com/user-attachments/assets/334bb3fd-886d-4780-aeb2-129706933b95)
 ![localhost_dashboard](https://github.com/user-attachments/assets/c5c032fa-ee58-4ea9-99e7-63a2e39d5407)
