@@ -51,5 +51,15 @@
                 </div>
             </div>
         </div>
+        @if(Auth::id() === $idea->user->id )
+            <div class="btnArea max-w-7xl mx-auto mt-5 text-center">
+                <a href="{{ route('idea.edit',$idea) }}" class="btn02">記事を編集</a>
+                <form action="{{ route('idea.destroy', $idea->id) }}" method="POST" onsubmit="return confirm('本当に削除しますか？');">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn01 mt-5">記事を削除</button>
+                </form>
+            </div>
+        @endif
     </div>
 </x-app-layout>

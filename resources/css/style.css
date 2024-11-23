@@ -63,6 +63,7 @@ img{
 }
 
 .btn01:hover{
+    border: solid 2px #0c8aac;
     background: #fff;
     color: #0c8aac;
 }
@@ -77,6 +78,7 @@ img{
 }
 
 .btn02:hover{
+    border: solid 2px #0c8aac;
     background: #0c8aac;
     color: #fff;
 }

@@ -9,9 +9,24 @@
         <h3 class="titH3 mb-3">編集</h3>
         </div>
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 py-12 bg-white rounded-md">
-            <form method="post" action="" enctype="multipart/form-data" class="space-y-5 mt-5">
+            <form method="post" action="{{ route('idea.update',$idea) }}" enctype="multipart/form-data" class="space-y-5 mt-5">
                 @csrf  
-                @include('idea.ideaform')
+                @include('idea.ideaform', ['idea' => $idea])
+            </form>
+        </div>
+    </div>
+    <div class="flex pb-5 max-w-6xl mx-auto">
+        <div class="">
+            <button type="submit" class="btn02 ml-3">登録</button>
+        </div>
+        <div class="">
+            <a href="{{ route('idea.detail',$idea) }}" class="btn02 ml-3">戻る</a>
+        </div>
+        <div class="">
+            <form action="{{ route('idea.destroy', $idea->id) }}" method="POST" onsubmit="return confirm('本当に削除しますか？');">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn01 ml-3">記事を削除</button>
             </form>
         </div>
     </div>

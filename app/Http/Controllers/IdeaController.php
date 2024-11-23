@@ -84,6 +84,7 @@ class IdeaController extends Controller
      */
     public function show($id)
     {
+        $user_id = Auth::id();
         $idea = Idea::with(['IdeaItems', 'IdeaImages', 'IdeaReferences'])->find($id);
         return view('idea.detail',compact('idea'));
     }
@@ -113,8 +114,7 @@ class IdeaController extends Controller
             'content' => $request->content,
         ]);
     
-        // Items（アイディアアイテム）の更新
-        if ($request->has('Items')) {
+        if ($request->has('IdeaItems')) {
             // 古いデータを削除（必要なら条件付きで削除）
             $idea->items()->delete();
     
@@ -127,8 +127,7 @@ class IdeaController extends Controller
             }
         }
     
-        // References（参照データ）の更新
-        if ($request->has('references')) {
+        if ($request->has('IdeaReferences')) {
             // 古いデータを削除（必要なら条件付きで削除）
             $idea->references()->delete();
     
@@ -169,10 +168,10 @@ class IdeaController extends Controller
      */
     public function destroy(string $id)
     {
-        $idea = Idea::findOrFail($id);
+        $idea = Idea::with(['IdeaItems', 'IdeaImages', 'IdeaReferences'])->find($id);
         $idea->delete();
         return redirect()
-            ->route('ida$idea.index')
+            ->route('idea.myidea')
             ->with('status','ブックマークを削除しました。');
     }
 
