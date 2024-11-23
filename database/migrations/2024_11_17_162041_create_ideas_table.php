@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('category_id');
-            $table->foreignId('coverage_range_id');
+            $table->foreignId('coverage_range_id')->nullable();
             $table->string('title');
             $table->text('content');
             $table->timestamps();

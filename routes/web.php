@@ -22,8 +22,8 @@ Route::get('/idea/myidea', [ideaController::class, 'myidea'])->name('idea.myidea
 Route::get('/idea/list', [ideaController::class, 'index'])->name('idea.list');
 Route::get('/idea/detail/{id}', [ideaController::class, 'show'])->name('idea.detail');
 Route::get('/idea/record', [ideaController::class, 'create'])->name('idea.create');
-Route::post('/ideas/record', [IdeaController::class, 'store'])->name('idea.store');
-Route::get('/idea/edit', [ideaController::class, 'edit'])->name('idea.edit');
+Route::post('/idea/record', [IdeaController::class, 'store'])->name('idea.store');
+Route::get('/idea/edit/{id}', [ideaController::class, 'edit'])->name('idea.edit');
 
 
 require __DIR__.'/auth.php';

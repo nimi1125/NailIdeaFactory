@@ -1,40 +1,51 @@
 <x-app-layout>
+    <x-slot name="cover">
+        <h2 class="font-semibold text-white leading-tight pattaya titH2">
+            Idea
+        </h2>
+    </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto py-12 bg-white rounded">
-            <div class="idea-details">
-                <!-- カテゴリとタイトル -->
-                <h1>{{ $idea->title }}</h1>
-                <p>カテゴリ: {{ $idea->category->name ?? '未設定' }}</p>
-        
-                <!-- 画像一覧 -->
-                <div class="idea-images">
-                    <h2>画像</h2>
-                    @foreach ($idea->images as $image)
-                        <div class="image-block">
-                            <img src="{{ Storage::url($image->image_path) }}" alt="アイデア画像" style="width: 100%; height: auto;">
-                            <p>{{ $image->content ?? '説明なし' }}</p>
-                        </div>
-                    @endforeach
+            <div class="ideaDetails">
+                <div class="flex items-center">
+                    <p class="text-sm text-white bg-gray-500 p-1"> {{ $idea->category->name ?? '未設定' }}</p>
+                    <h2 class="titH2 ml-5">{{ $idea->title }}</h2>
                 </div>
-        
-                <!-- 参考デザイン -->
+
+                <div class="ideaContentArea mb-5">
+                    <p class="text-2xl">{{ $idea->content ?? '' }}</p>
+                </div>
+
+                <div class="ideaImagesArea">
+                    <h4 class="detail titH4 relative">参考画像</h4>
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+                        @foreach ($idea->ideaImages as $image)
+                            <div class="ideaImageBox flex flex-col items-center">
+                                <div class="ideaImageItem">
+                                    <img src="{{ asset($image->image_path) }}" alt="アイデア参考画像" class="ideaImage">
+                                </div>
+                                <p>{{ $image->content ?? '説明なし' }}</p>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
                 <div class="idea-references">
-                    <h2>参考デザイン</h2>
-                    @foreach ($idea->references as $reference)
-                        <div class="reference-block">
+                    <h4 class="detail titH4 relative">参考デザイン</h4>
+                    @foreach ($idea->IdeaReferences as $reference)
+                        <div class="reference-block mb-2">
+                            <p>詳細:{{ $reference->content ?? '説明なし' }}</p>
                             <p>URL: <a href="{{ $reference->url }}" target="_blank">{{ $reference->url }}</a></p>
-                            <p>{{ $reference->content ?? '説明なし' }}</p>
                         </div>
                     @endforeach
                 </div>
-        
-                <!-- 使いたいパーツ -->
+
                 <div class="idea-items">
-                    <h2>使いたいパーツ</h2>
-                    @foreach ($idea->items as $item)
+                    <h4 class="detail titH4 relative">使いたいアイテム</h4>
+                    @foreach ($idea->IdeaItems as $item)
                         <div class="item-block">
+                            <p>詳細:{{ $item->content ?? '説明なし' }}</p>
                             <p>URL: <a href="{{ $item->url }}" target="_blank">{{ $item->url }}</a></p>
-                            <p>{{ $item->content ?? '説明なし' }}</p>
                         </div>
                     @endforeach
                 </div>

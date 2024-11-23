@@ -25,12 +25,11 @@ class IdeaRequest extends FormRequest
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'category_id' => 'required|integer',
-            'coverage_range_id' => 'required|integer',
             'reference_url.*' => 'nullable|url',
             'reference_content.*' => 'nullable|string',
             'item_url.*' => 'nullable|url',
             'item_content.*' => 'nullable|string',
-            'images.*' => 'nullable|image|max:2048', // 2MB制限
+            'images.*' => 'nullable|image|max:2048', 
         ];
     }
     public function messages()

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class IdeaImage extends Model
 {
-    protected $table = 'idea_image';
+    protected $table = 'idea_images';
     protected $fillable = ['idea_id','image_path']; 
 
     public function idea()
