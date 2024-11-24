@@ -1,0 +1,137 @@
+/* 共通 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Pattaya&display=swap');
+
+.pattaya {
+    font-family: "Pattaya", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.notoSerifJp {
+    font-family: "Noto Serif JP", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+  }
+
+body{
+    color: #333;
+    font-family: "Noto Sans JP", serif;
+    font-weight: normal;
+    font-style: normal;
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+}
+
+.hedTit{
+    font-size: 2.4rem;
+}
+
+.titH2{
+    font-size: 2.3rem;
+}
+
+.titH3{
+    font-size: 2rem;
+}
+
+.titH4{
+    font-size: 1.8rem;
+}
+
+.bodyBg{
+    background-color: #d8dee0;
+}
+
+.bg01{
+    background-color: #0c8aac;
+}
+
+.bg02{
+    background-color: #9ab9c1;
+}
+
+.btn01{
+    display: inline-block;
+    border: solid 2px #fff;
+    border-radius: 25px;
+    padding: 10px 25px;
+    color: #fff;
+    background-color: #0c8aac;
+}
+
+.btn01:hover{
+    border: solid 2px #0c8aac;
+    background: #fff;
+    color: #0c8aac;
+}
+
+.btn02{
+    display: inline-block;
+    border: solid 2px #0c8aac;
+    border-radius: 25px;
+    padding: 10px 25px;
+    color: #0c8aac;
+    background-color: #fff;
+}
+
+.btn02:hover{
+    border: solid 2px #0c8aac;
+    background: #0c8aac;
+    color: #fff;
+}
+
+.topCvArea{
+    height: 50vh;
+}
+
+.inrCvHi{
+    height: 200px;
+}
+
+.inrCvHi:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #020d1263;
+}
+
+/* detail */
+
+.detail.titH4{
+    padding-left: 0.2rem;
+}
+
+.detail.titH4::before{
+    content: "";
+    width: 0.3rem;
+    height: 1.8rem;
+    background: #0c8aac;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    left: -0.4rem;
+}
+
+.ideaDetails{
+    padding: 1rem 2rem;
+}
+
+.categoryTxt{
+    padding: 0.1rem 0.2rem;
+    background-color: #0c8aac;
+    color: #fff;
+}
+
+
+@media screen and (min-width: 768px){
+    .topCvArea{
+        height: 100vh;
+    }
+}
