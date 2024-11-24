@@ -1,5 +1,5 @@
 <div class="mb-4">
-    <label class="text-2xl font-semibold mt-5 pattaya" for="title">タイトル</label>
+    <label class="text-2xl font-semibold mt-5" for="title">タイトル</label>
     <input 
         type="text" 
         name="title" 
@@ -30,7 +30,7 @@
 </div>
 
 <div class="mb-4">
-    <label class="text-2xl font-semibold mt-5 pattaya" for="content">デザイン詳細</label>
+    <label class="text-2xl font-semibold mt-5" for="content">デザイン詳細</label>
     <textarea 
         name="content" 
         id="content" 
@@ -51,11 +51,11 @@
             @foreach ($idea->ideaImages as $image)
                 <div class="flex items-center space-x-3 mb-2">
                     <img src="{{ $image->image_path }}" alt="登録済み画像" style="width: 100px;">
-                    <label for="image_{{ $loop->index }}">新しい画像に置き換える:</label>
+                    <label for="images_0">新しい画像に置き換える:</label>
                     <input 
                         type="file" 
-                        name="images[{{ $loop->index }}]"
-                        id="image_{{ $loop->index }}" 
+                        name="images[]"
+                        id="image_0" 
                         class="block text-sm text-gray-500 
                             file:mr-4 file:py-2 file:px-4
                             file:rounded-lg file:border-0
@@ -71,8 +71,8 @@
     <h3 class="font-semibold text-lg">{{ isset($idea) ? '新しい画像を追加' : '画像を登録' }}</h3>
     <input 
         type="file" 
-        name="image[]" 
-        multiple
+        name="images[0]" 
+        multiplef
         class="block text-sm text-gray-500 
             file:mr-4 file:py-2 file:px-4
             file:rounded-lg file:border-0
@@ -87,7 +87,7 @@
 
 
 <div class="mb-4">
-    <label class="text-2xl font-semibold mt-5 pattaya" for="references[0][url]">参考にしたいURL</label>
+    <label class="text-2xl font-semibold mt-5" for="references[0][url]">参考にしたいURL</label>
     <input 
         type="text" 
         name="references[0][url]" 
@@ -101,7 +101,7 @@
 </div>
 
 <div class="mb-4">
-    <label class="text-2xl font-semibold mt-5 pattaya" for="references[0][content]">参考にしたいアイディアの説明</label>
+    <label class="text-2xl font-semibold mt-5" for="references[0][content]">参考にしたいアイディアの説明</label>
     <textarea 
         name="references[0][content]" 
         id="references_content_0" 
@@ -114,12 +114,12 @@
 
 
 <div class="mb-4">
-    <label class="text-2xl font-semibold mt-5 pattaya" for="items[0][url]">使いたいパーツのURL</label>
+    <label class="text-2xl font-semibold mt-5" for="items[0][url]">使いたいパーツのURL</label>
     <input 
         type="text" 
         name="items[0][url]" 
         id="items_url_0" 
-        value="{{ old($reference->url ?? '') }}" 
+        value="{{ old('items.0.url', $idea->items[0]->url ?? '') }}" 
         class="rounded-md w-full h-12 p-3 border border-gray-300"
         placeholder="URLを入力">
     @error('items.0.url')
@@ -128,7 +128,7 @@
 </div>
 
 <div class="mb-4">
-    <label class="text-2xl font-semibold mt-5 pattaya" for="items[0][content]">使いたいパーツの説明・メモなど</label>
+    <label class="text-2xl font-semibold mt-5" for="items[0][content]">使いたいパーツの説明・メモなど</label>
     <textarea 
         name="items[0][content]" 
         id="items_content_0" 

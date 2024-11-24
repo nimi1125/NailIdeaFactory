@@ -45,16 +45,17 @@ class IdeaController extends Controller
             'content' => $request->content,
         ]);
     
-        if ($request->has('Items')) {
-            foreach ($request->Items as $Item) {
+        if ($request->has('items') && is_array($request->items)) {
+            foreach ($request->items as $item) {
                 IdeaItem::create([
                     'idea_id' => $idea->id,
-                    'url' => $Item['url'] ?? null,
-                    'content' => $Item['content'] ?? null,
+                    'url' => $item['url'] ?? null,
+                    'content' => $item['content'] ?? null,
                 ]);
             }
         }
-        if ($request->has('references')) {
+        
+        if ($request->has('references') && is_array($request->references)) {
             foreach ($request->references as $reference) {
                 IdeaReference::create([
                     'idea_id' => $idea->id,
@@ -65,15 +66,18 @@ class IdeaController extends Controller
         }
     
         
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('idea_images', 'public');
-            $imageUrl = Storage::url($imagePath);
-
-            IdeaImage::create([
-                'idea_id' => $idea->id,
-                'image_path' => $imageUrl,
-            ]);
+        if ($request->hasFile('images') && is_array($request->file('images'))) {
+            foreach ($request->file('images') as $file) {
+                $imagePath = $file->store('idea_images', 'public');
+                $imageUrl = Storage::url($imagePath);
+        
+                IdeaImage::create([
+                    'idea_id' => $idea->id,
+                    'image_path' => $imageUrl,
+                ]);
+            }
         }
+        
     
         return redirect()->route('idea.create')->with('success', 'アイデアを登録しました！');
     }
@@ -103,67 +107,66 @@ class IdeaController extends Controller
      * Update the specified resource in storage.
      */
     public function update(IdeaRequest $request, $id)
-    {
-        // 対象のアイディアを取得
-        $idea = Idea::findOrFail($id);
-    
-        // 基本情報の更新
-        $idea->update([
-            'category_id' => $request->category_id,
-            'title' => $request->title,
-            'content' => $request->content,
-        ]);
-    
-        if ($request->has('IdeaItems')) {
-            // 古いデータを削除（必要なら条件付きで削除）
-            $idea->items()->delete();
-    
-            foreach ($request->Items as $Item) {
-                IdeaItem::create([
-                    'idea_id' => $idea->id,
-                    'url' => $Item['url'] ?? null,
-                    'content' => $Item['content'] ?? null,
-                ]);
-            }
+{
+    // 対象のアイディアを取得
+    $idea = Idea::with(['IdeaItems', 'IdeaImages', 'IdeaReferences'])->findOrFail($id);
+
+    // 基本情報の更新
+    $idea->update([
+        'category_id' => $request->category_id,
+        'title' => $request->title,
+        'content' => $request->content,
+    ]);
+
+    // アイテムの更新
+    if ($request->has('items') && is_array($request->items)) {
+        $idea->IdeaItems()->delete();
+        foreach ($request->items as $item) {
+            IdeaItem::create([
+                'idea_id' => $idea->id,
+                'url' => $item['url'] ?? null,
+                'content' => $item['content'] ?? null,
+            ]);
         }
-    
-        if ($request->has('IdeaReferences')) {
-            // 古いデータを削除（必要なら条件付きで削除）
-            $idea->references()->delete();
-    
-            foreach ($request->references as $reference) {
-                IdeaReference::create([
-                    'idea_id' => $idea->id,
-                    'url' => $reference['url'] ?? null,
-                    'content' => $reference['content'] ?? null,
-                ]);
-            }
-        }
-    
-        // 画像の更新
-        if ($request->hasFile('image')) {
-            // 古い画像を削除
-            if ($idea->images && $idea->images->isNotEmpty()) {
-                foreach ($idea->images as $image) {
-                    Storage::disk('public')->delete($image->image_path); // ファイル削除
-                    $image->delete(); // レコード削除
-                }
-            }
-        
-            if ($request->hasFile('images')) {
-                foreach ($request->file('images') as $file) {
-                $imagePath = $request->file('image')->store('idea_images', 'public');
-                $imageUrl = Storage::url($imagePath);
-        
-                IdeaImage::create([
-                    'idea_id' => $idea->id,
-                    'image_path' => $imageUrl,
-                ]);
-                }
-            }
-        }
-        return redirect()->route('idea.detail', $id)->with('success', 'アイディアを更新しました！');
     }
+
+    // 参考データの更新
+    if ($request->has('references') && is_array($request->references)) {
+        $idea->IdeaReferences()->delete();
+        foreach ($request->references as $reference) {
+            IdeaReference::create([
+                'idea_id' => $idea->id,
+                'url' => $reference['url'] ?? null,
+                'content' => $reference['content'] ?? null,
+            ]);
+        }
+    }
+
+    // 画像の更新
+    if ($request->hasFile('images') && is_array($request->file('images'))) {
+        // 古い画像を削除
+        if ($idea->images && $idea->images->isNotEmpty()) {
+            foreach ($idea->images as $image) {
+                Storage::disk('public')->delete($image->image_path);
+                $image->delete();
+            }
+        }
+
+        // 新しい画像を保存
+        foreach ($request->file('images') as $file) {
+            $imagePath = $file->store('idea_images', 'public');
+            $imageUrl = Storage::url($imagePath);
+
+            IdeaImage::create([
+                'idea_id' => $idea->id,
+                'image_path' => $imageUrl,
+            ]);
+        }
+    }
+
+    return redirect()->route('idea.detail', $id)->with('success', 'アイディアを更新しました！');
+}
+
 
     /**
      * Remove the specified resource from storage.
@@ -177,7 +180,7 @@ class IdeaController extends Controller
         $idea->delete();
         return redirect()
             ->route('idea.myidea')
-            ->with('status','ブックマークを削除しました。');
+            ->with('status','アイディアを削除しました。');
     }
 
 /**
