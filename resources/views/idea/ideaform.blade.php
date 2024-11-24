@@ -92,8 +92,12 @@
     <input 
         type="text" 
         name="references[0][url]" 
-        id="references_url_0" 
-        value="{{ old('references.0.url', $reference->url ?? '') }}" 
+        id="references_url_0"
+        @if(isset($idea) && $idea->IdeaReferences->isNotEmpty())
+            @foreach ($idea->IdeaReferences as $reference)
+                value="{{ old('references.0.url', $reference->url ?? '') }}" 
+            @endforeach
+        @endif
         class="rounded-md w-full h-12 p-3 border border-gray-300"
         placeholder="URLを入力">
     @error('reference_url')
@@ -107,7 +111,13 @@
         name="references[0][content]" 
         id="references_content_0" 
         class="rounded-md w-full p-3 border border-gray-300 resize-none"
-        placeholder="参考のURLの説明など">{{ old('references.0.content', $idea->references[0]->content ?? '') }}</textarea>
+        placeholder="参考のURLの説明など">
+        @if(isset($idea) && $idea->IdeaReferences->isNotEmpty())
+            @foreach ($idea->IdeaReferences as $reference)
+            {{ old('references.0.content', $idea->references[0]->content ?? '') }}
+            @endforeach
+        @endif
+    </textarea>
     @error('reference_content')
         <div class="text-red-600">{{ $message }}</div>
     @enderror
@@ -120,7 +130,11 @@
         type="text" 
         name="items[0][url]" 
         id="items_url_0" 
-        value="{{ old('items.0.url', $idea->items[0]->url ?? '') }}" 
+        @if(isset($idea) && $idea->IdeaItems->isNotEmpty())
+            @foreach ($idea->IdeaItems as $IdeaItem)
+            value="{{ old('items.0.url', $idea->items[0]->url ?? '') }}" 
+            @endforeach
+        @endif
         class="rounded-md w-full h-12 p-3 border border-gray-300"
         placeholder="URLを入力">
     @error('item_url')
@@ -134,7 +148,12 @@
         name="items[0][content]" 
         id="items_content_0" 
         class="rounded-md w-full p-3 border border-gray-300 resize-none"
-        placeholder="参考のURLの説明など">{{ old('items.0.content', $idea->items[0]->content ?? '') }}</textarea>
+        @if(isset($idea) && $idea->IdeaItems->isNotEmpty())
+            @foreach ($idea->IdeaItems as $IdeaItem)
+            placeholder="参考のURLの説明など">{{ old('items.0.content', $idea->items[0]->content ?? '') }}
+            @endforeach
+        @endif
+    </textarea>
     @error('item_content')
         <div class="text-red-600">{{ $message }}</div>
     @enderror
