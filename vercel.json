@@ -6,11 +6,17 @@
     "builds": [
         {
             "src": "api/index.php",
-            "use": "vercel-php@0.6.0"
+            "use": "vercel-php@0.6.0",
+            "config": {
+                "phpVersion": "8.2"  
+            }
         },
         {
             "src": "public/**",
-            "use": "vercel-php@0.6.0"
+            "use": "vercel-php@0.6.0",
+            "config": {
+                "phpVersion": "8.2"  
+            }
         }
     ],
     "routes": [
