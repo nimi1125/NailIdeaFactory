@@ -1,7 +1,10 @@
 #!/bin/bash
 
-# Install necessary packages
-apt-get update && apt-get install -y libssl1.0-dev
+# 必要な依存関係をインストール
+apt-get update && apt-get install -y \
+  libcurl4-openssl-dev \
+  libpq-dev \
+  libnss3
 
-# Continue with the usual build process
+# 通常のビルドを続行
 vercel build
