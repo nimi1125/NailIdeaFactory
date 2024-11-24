@@ -17,9 +17,6 @@
     </div>
     <div class="flex pb-5 max-w-6xl mx-auto">
         <div class="">
-            <button type="submit" class="btn02 ml-3">登録</button>
-        </div>
-        <div class="">
             <a href="{{ route('idea.detail',$idea) }}" class="btn02 ml-3">戻る</a>
         </div>
         <div class="">

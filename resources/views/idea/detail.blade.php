@@ -6,6 +6,11 @@
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto py-12 bg-white rounded">
+            @if (session('success'))
+                <div class="alert alert-success p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400">
+                    {{ session('success') }}
+                </div>
+            @endif
             <div class="ideaDetails">
                 <div class="flex items-center">
                     <p class="text-sm text-white bg-gray-500 p-1"> {{ $idea->category->name ?? '未設定' }}</p>

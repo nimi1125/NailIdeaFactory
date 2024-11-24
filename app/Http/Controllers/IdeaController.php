@@ -142,25 +142,27 @@ class IdeaController extends Controller
     
         // 画像の更新
         if ($request->hasFile('image')) {
-            // 古い画像を削除（必要に応じて）
-            if ($idea->images->isNotEmpty()) {
+            // 古い画像を削除
+            if ($idea->images && $idea->images->isNotEmpty()) {
                 foreach ($idea->images as $image) {
                     Storage::disk('public')->delete($image->image_path); // ファイル削除
                     $image->delete(); // レコード削除
                 }
             }
-    
-            // 新しい画像を登録
-            $imagePath = $request->file('image')->store('idea_images', 'public');
-            $imageUrl = Storage::url($imagePath);
-    
-            IdeaImage::create([
-                'idea_id' => $idea->id,
-                'image_path' => $imageUrl,
-            ]);
+        
+            if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $file) {
+                $imagePath = $request->file('image')->store('idea_images', 'public');
+                $imageUrl = Storage::url($imagePath);
+        
+                IdeaImage::create([
+                    'idea_id' => $idea->id,
+                    'image_path' => $imageUrl,
+                ]);
+                }
+            }
         }
-    
-        return redirect()->route('idea.edit', $id)->with('success', 'アイディアを更新しました！');
+        return redirect()->route('idea.detail', $id)->with('success', 'アイディアを更新しました！');
     }
 
     /**
@@ -169,14 +171,17 @@ class IdeaController extends Controller
     public function destroy(string $id)
     {
         $idea = Idea::with(['IdeaItems', 'IdeaImages', 'IdeaReferences'])->find($id);
+        $idea->IdeaReferences()->delete();
+        $idea->IdeaImages()->delete();
+        $idea->IdeaItems()->delete();
         $idea->delete();
         return redirect()
             ->route('idea.myidea')
             ->with('status','ブックマークを削除しました。');
     }
 
-    /**
- * 
+/**
+ * Display a listing of the user's ideas.
  */
     public function myidea()
     {

@@ -4,7 +4,7 @@
             <h3 class="titH3 pattaya">Public page<span class="text-sm">公開ページ</span></h3>
             <div class="flex flex-wrap">
                 <div class="md:w-1/2 w-full p-2">
-                    <a href="{{ route('idea.list') }}" class="flex flex-col items-center bg-white rounded p-3.5">
+                    <a href="{{ route('idea.index') }}" class="flex flex-col items-center bg-white rounded p-3.5">
                         <img src="{{ asset('img/note_icon.jpg') }}" alt="ノート" class="mx-auto">
                         <p class="text-2xl mt-2 pattaya">Idea list</p>
                         <p class="text-l">アイディア一覧表示</p>

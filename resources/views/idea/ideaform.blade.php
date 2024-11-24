@@ -139,3 +139,6 @@
     @enderror
 </div>
 
+<div class="mt-4">
+        <button type="submit" class="btn02 ml-3">登録</button>
+</div>
