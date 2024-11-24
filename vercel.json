@@ -1,25 +1,30 @@
 {
-    "version": 2,
     "regions": [
         "hnd1"
     ],
     "builds": [
         {
-            "src": "api/index.php",
-            "use": "vercel-php@0.6.0",
-            "config": {
-                "phpVersion": "8.2"  
-            }
+            "src": "/api/index.php",
+            "use": "vercel-php@0.7.3"
         },
         {
-            "src": "public/**",
-            "use": "vercel-php@0.6.0",
-            "config": {
-                "phpVersion": "8.2"  
-            }
+            "src": "/public/**",
+            "use": "@vercel/static"
         }
     ],
     "routes": [
+        {
+            "src": "/build/assets/(.*)",
+            "dest": "/public/build/assets/$1"
+        },
+        {
+            "src": "/favicon.ico",
+            "dest": "/public/favicon.ico"
+        },
+        {
+            "src": "/robots.txt",
+            "dest": "/public/robots.txt"
+        },
         {
             "src": "/(.*)",
             "dest": "/api/index.php"
