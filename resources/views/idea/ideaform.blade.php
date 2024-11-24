@@ -50,12 +50,11 @@
             <h3 class="font-semibold text-lg">登録済み画像</h3>
             @foreach ($idea->ideaImages as $image)
                 <div class="flex items-center space-x-3 mb-2">
-                    <img src="{{ $image->image_path }}" alt="登録済み画像" style="width: 100px;">
-                    <label for="images_0">新しい画像に置き換える:</label>
+                    <img src="{{ asset($image->image_path) }}" alt="登録済み画像" style="width: 100px;">
+                    <label for="images_{{ $loop->index }}">新しい画像に置き換える:</label>
                     <input 
                         type="file" 
-                        name="images[]"
-                        id="image_0" 
+                        name="images[{{ $loop->index }}]" 
                         class="block text-sm text-gray-500 
                             file:mr-4 file:py-2 file:px-4
                             file:rounded-lg file:border-0
@@ -65,20 +64,22 @@
                 </div>
             @endforeach
         </div>
+        @else
+            {{-- 新規画像のアップロード --}}
+            <h3 class="font-semibold text-lg">{{ isset($idea) ? '新しい画像を追加' : '画像を登録' }}</h3>
+            <input 
+                type="file" 
+                name="images[0]" 
+                multiple
+                class="block text-sm text-gray-500 
+                    file:mr-4 file:py-2 file:px-4
+                    file:rounded-lg file:border-0
+                    file:text-sm file:font-semibold
+                    file:bg-blue-50 file:text-blue-700
+                    hover:file:bg-blue-100 cursor-pointer">
     @endif
 
-    {{-- 新規画像のアップロード --}}
-    <h3 class="font-semibold text-lg">{{ isset($idea) ? '新しい画像を追加' : '画像を登録' }}</h3>
-    <input 
-        type="file" 
-        name="images[0]" 
-        multiplef
-        class="block text-sm text-gray-500 
-            file:mr-4 file:py-2 file:px-4
-            file:rounded-lg file:border-0
-            file:text-sm file:font-semibold
-            file:bg-blue-50 file:text-blue-700
-            hover:file:bg-blue-100 cursor-pointer">
+
     
     @error('image')
         <div class="text-red-600">{{ $message }}</div>
@@ -92,10 +93,10 @@
         type="text" 
         name="references[0][url]" 
         id="references_url_0" 
-        value="{{ old('references.0.url', $idea->references[0]->url ?? '') }}" 
+        value="{{ old('references.0.url', $reference->url ?? '') }}" 
         class="rounded-md w-full h-12 p-3 border border-gray-300"
         placeholder="URLを入力">
-    @error('references.0.url')
+    @error('reference_url')
         <div class="text-red-600">{{ $message }}</div>
     @enderror
 </div>
@@ -107,7 +108,7 @@
         id="references_content_0" 
         class="rounded-md w-full p-3 border border-gray-300 resize-none"
         placeholder="参考のURLの説明など">{{ old('references.0.content', $idea->references[0]->content ?? '') }}</textarea>
-    @error('references.0.content')
+    @error('reference_content')
         <div class="text-red-600">{{ $message }}</div>
     @enderror
 </div>
@@ -122,7 +123,7 @@
         value="{{ old('items.0.url', $idea->items[0]->url ?? '') }}" 
         class="rounded-md w-full h-12 p-3 border border-gray-300"
         placeholder="URLを入力">
-    @error('items.0.url')
+    @error('item_url')
         <div class="text-red-600">{{ $message }}</div>
     @enderror
 </div>
@@ -134,7 +135,7 @@
         id="items_content_0" 
         class="rounded-md w-full p-3 border border-gray-300 resize-none"
         placeholder="参考のURLの説明など">{{ old('items.0.content', $idea->items[0]->content ?? '') }}</textarea>
-    @error('items.0.content')
+    @error('item_content')
         <div class="text-red-600">{{ $message }}</div>
     @enderror
 </div>

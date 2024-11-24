@@ -20,7 +20,10 @@ class IdeaController extends Controller
      */
     public function index()
     {
-        $ideas = Idea::orderBy('created_at', 'desc')->get();
+        $ideas = Idea::orderBy('created_at', 'desc')
+        ->orderBy('created_at', 'desc') // 並び順を指定
+        ->paginate(12); 
+        
         return view('idea.list',compact('ideas'));
     }
 
@@ -98,6 +101,7 @@ class IdeaController extends Controller
      */
     public function edit($id)
     {
+        $user_id = Auth::id();
         $categories = Category::all();
         $idea = Idea::with(['IdeaItems', 'IdeaImages', 'IdeaReferences'])->findOrFail($id);
         return view('idea.edit',compact('categories','idea'));
@@ -143,16 +147,20 @@ class IdeaController extends Controller
     }
 
     // 画像の更新
-    if ($request->hasFile('images') && is_array($request->file('images'))) {
-        // 古い画像を削除
-        if ($idea->images && $idea->images->isNotEmpty()) {
-            foreach ($idea->images as $image) {
-                Storage::disk('public')->delete($image->image_path);
-                $image->delete();
-            }
+    \Log::debug($request);
+    \Log::debug($request->hasFile('images'));
+    \Log::debug(is_array($request->file('images')));
+    // 古い画像の削除
+    if ($idea->ideaImages && $idea->ideaImages->isNotEmpty()) {
+        foreach ($idea->ideaImages as $oldImage) {
+            $relativePath = str_replace('/storage/', '', $oldImage->image_path);
+            Storage::disk('public')->delete($relativePath);
+            $oldImage->delete();
         }
+    }
 
-        // 新しい画像を保存
+    // 新しい画像を保存
+    if ($request->hasFile('images') && is_array($request->file('images'))) {
         foreach ($request->file('images') as $file) {
             $imagePath = $file->store('idea_images', 'public');
             $imageUrl = Storage::url($imagePath);
@@ -186,15 +194,15 @@ class IdeaController extends Controller
 /**
  * Display a listing of the user's ideas.
  */
-    public function myidea()
-    {
-        $userId = Auth::id();
+public function myidea()
+{
+    $userId = Auth::id();
 
-        $ideas = Idea::where('user_id', $userId)
-            ->orderBy('created_at', 'desc')                   
-            ->get();
+    $ideas = Idea::where('user_id', $userId)
+        ->orderBy('created_at', 'desc') // 並び順を指定
+        ->paginate(12); // ページネーション
 
-        return view('idea.myidea', compact('ideas'));
-    }
+    return view('idea.myidea', ['ideas' => $ideas]);
+}
 }
 
