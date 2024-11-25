@@ -23,7 +23,7 @@
         <header class="homeInr relative">
             <div class="topCvArea flex flex-col items-center justify-center">
                 <!-- 背景画像の表示エリア -->
-                <img src="{{ asset('img/top_cv.jpg') }}" alt="トップカバー" class="w-full h-full object-cover">
+                <img src="{{ asset('img/top_cv.JPG') }}" alt="トップカバー" class="w-full h-full object-cover">
     
                 <div class="absolute top-0 w-full max-w-2xl px-6 lg:max-w-7xl">
                     <div class="flex lg:justify-center mt-4 items-center">
