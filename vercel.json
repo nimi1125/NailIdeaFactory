@@ -30,6 +30,8 @@
             "dest": "/api/index.php"
         }
     ],
+    "buildCommand": "./.vercel/build.sh",
+    "outputDirectory": "public",
     "env": {
         "APP_NAME": "Laravel Vercel",
         "APP_DEBUG": "false",
