@@ -147,9 +147,6 @@ class IdeaController extends Controller
     }
 
     // 画像の更新
-    \Log::debug($request);
-    \Log::debug($request->hasFile('images'));
-    \Log::debug(is_array($request->file('images')));
     // 古い画像の削除
     if ($idea->ideaImages && $idea->ideaImages->isNotEmpty()) {
         foreach ($idea->ideaImages as $oldImage) {
