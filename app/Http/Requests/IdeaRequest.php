@@ -29,9 +29,10 @@ class IdeaRequest extends FormRequest
             'reference_content' => 'nullable|string',
             'item_url' => 'nullable|url',
             'item_content' => 'nullable|string',
-            'images' => 'nullable|image|max:2048', 
+            'images.*' => 'nullable|image|max:2048', 
         ];
     }
+    
     public function messages()
     {
         return [

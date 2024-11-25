@@ -122,17 +122,28 @@ class IdeaController extends Controller
         'content' => $request->content,
     ]);
 
-    // アイテムの更新
     if ($request->has('items') && is_array($request->items)) {
-        $idea->IdeaItems()->delete();
         foreach ($request->items as $item) {
-            IdeaItem::create([
-                'idea_id' => $idea->id,
-                'url' => $item['url'] ?? null,
-                'content' => $item['content'] ?? null,
-            ]);
+            if (isset($item['id'])) {
+                // 既存データの更新
+                $ideaItem = IdeaItem::find($item['id']);
+                if ($ideaItem) {
+                    $ideaItem->update([
+                        'url' => $item['url'] ?? null,
+                        'content' => $item['content'] ?? null,
+                    ]);
+                }
+            } else {
+                // 新規データの作成
+                IdeaItem::create([
+                    'idea_id' => $idea->id,
+                    'url' => $item['url'] ?? null,
+                    'content' => $item['content'] ?? null,
+                ]);
+            }
         }
     }
+    
 
     // 参考データの更新
     if ($request->has('references') && is_array($request->references)) {
@@ -146,28 +157,29 @@ class IdeaController extends Controller
         }
     }
 
-    // 画像の更新
-    // 古い画像の削除
-    if ($idea->ideaImages && $idea->ideaImages->isNotEmpty()) {
-        foreach ($idea->ideaImages as $oldImage) {
-            $relativePath = str_replace('/storage/', '', $oldImage->image_path);
-            Storage::disk('public')->delete($relativePath);
-            $oldImage->delete();
-        }
-    }
-
-    // 新しい画像を保存
     if ($request->hasFile('images') && is_array($request->file('images'))) {
-        foreach ($request->file('images') as $file) {
-            $imagePath = $file->store('idea_images', 'public');
-            $imageUrl = Storage::url($imagePath);
-
+        foreach ($request->file('images') as $index => $file) {
+            // 古い画像の削除
+            $oldImage = $idea->ideaImages[$index] ?? null;
+            if ($oldImage) {
+                $relativePath = str_replace('/storage/', '', $oldImage->image_path);
+                Storage::disk('public')->delete($relativePath); // 実ファイルの削除
+                $oldImage->delete(); // レコードの削除
+            }
+    
+            // 新しい画像の保存
+            $imagePath = $file->store('idea_images', 'public'); // ファイル保存
+            $imageUrl = '/storage/' . $imagePath; // /storage/...形式のURL生成
+    
+            // データベースに保存
             IdeaImage::create([
                 'idea_id' => $idea->id,
                 'image_path' => $imageUrl,
             ]);
         }
     }
+    
+    
 
     return redirect()->route('idea.detail', $id)->with('success', 'アイディアを更新しました！');
 }

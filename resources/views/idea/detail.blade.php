@@ -55,6 +55,9 @@
                 </div>
             </div>
         </div>
+        <div class="btnArea max-w-7xl mx-auto mt-5 text-center">
+            <a href="{{ route('idea.index') }}" class="btn02">一覧にもどる</a>
+        </div>
         @if(Auth::id() === $idea->user->id )
             <div class="btnArea max-w-7xl mx-auto mt-5 text-center">
                 <a href="{{ route('idea.edit',$idea) }}" class="btn02">記事を編集</a>
