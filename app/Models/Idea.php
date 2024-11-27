@@ -11,10 +11,14 @@ class Idea extends Model
     
     protected $fillable = ['user_id', 'category_id', 'coverage_range_id', 'title', 'content']; 
 
-    
     public function user()
     {
         return $this->belongsTo('App\Models\User', 'user_id', 'id');
+    }
+
+    public function coverageRanges()
+    {
+        return $this->belongsTo('App\Models\CoverageRanges', 'coverage_range_id', 'id');
     }
 
     
@@ -51,4 +55,5 @@ class Idea extends Model
     {
         return $this->hasOne(IdeaImage::class, 'idea_id')->oldestOfMany();
     }
+
 }

@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="py-12">
-        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8">
             <h3 class="titH3 pattaya">Public page<span class="text-sm">公開ページ</span></h3>
             <div class="flex flex-wrap">
                 <div class="md:w-1/2 w-full p-2">
@@ -20,7 +20,7 @@
             </div>
         </div>
     <div class="py-12">
-        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8">
             <h3 class="titH3 pattaya">Account information<span class="text-sm">アカウント情報</span></h3>
             <div class="flex flex-wrap">
                 <div class="md:w-1/2 w-full p-2">
@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 mt-5">
+        <div class="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 mt-5">
             <h3 class="titH3 pattaya">Nail idea <span class="text-sm">ネイルアイディア</span></h3>
             <div class="flex flex-wrap">
                 <div class="md:w-1/2 w-full p-2">
@@ -51,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <div class="dashPostArea relative max-w-6xl mx-auto sm:px-6 lg:px-8 mt-5">
+        <div class="dashPostArea relative max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 mt-5">
             <h3 class="titH3 pattaya">Nail Post <span class="text-sm">ネイル投稿</span></h3>
             <p class="text-2xl">※準備中</p>
             <div class="flex flex-wrap">

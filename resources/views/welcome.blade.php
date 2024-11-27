@@ -49,11 +49,11 @@
                     <!-- ヘッダーのメインコンテンツ -->
                     <div class="text-white md:mt-80 mt-20">
                         <section>
-                            <h2 class="pattaya md:text-7xl">Nail Idea Factory</h2>
+                            <h2 class="pattaya text-4xl md:text-7xl">Nail Idea Factory</h2>
                             <p class="mt-2">ネイルデザインのメモ帳</p>
-                            <div class="flex mt-5">
-                                <a href="{{ route('login') }}" class="btn01">Log in</a>
-                                <a href="{{ route('register') }}" class="btn01 ml-3">Register</a>
+                            <div class="flex mt-5 flex-col md:flex-row items-center md:items-start">
+                                <a href="{{ route('login') }}" class="btn01 text-center md:max-w-48 w-full">Log in</a>
+                                <a href="{{ route('register') }}" class="btn01 md:ml-3 md:mt-0 mt-5 md:max-w-48 w-full text-center">Register</a>
                             </div>
                         </section>
                     </div>

@@ -25,13 +25,14 @@ class IdeaRequest extends FormRequest
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'category_id' => 'required|integer',
-            'reference_url.*' => 'nullable|url',
-            'reference_content.*' => 'nullable|string',
-            'item_url.*' => 'nullable|url',
-            'item_content.*' => 'nullable|string',
+            'reference_url' => 'nullable|url',
+            'reference_content' => 'nullable|string',
+            'item_url' => 'nullable|url',
+            'item_content' => 'nullable|string',
             'images.*' => 'nullable|image|max:2048', 
         ];
     }
+    
     public function messages()
     {
         return [
@@ -40,8 +41,8 @@ class IdeaRequest extends FormRequest
             'content.required' => '内容は必須です。',
             'category_id.required' => 'カテゴリは必須です。',
             'coverage_range_id.required' => '公開範囲は必須です。',
-            'images.*.image' => 'アップロードされたファイルは画像形式ではありません。',
-            'images.*.max' => '画像のサイズは2MB以下にしてください。',
+            'images.image' => 'アップロードされたファイルは画像形式ではありません。',
+            'images.max' => '画像のサイズは2MB以下にしてください。',
         ];
     }
 }

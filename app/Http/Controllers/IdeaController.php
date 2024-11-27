@@ -20,7 +20,10 @@ class IdeaController extends Controller
      */
     public function index()
     {
-        $ideas = Idea::orderBy('created_at', 'desc')->get();
+        $ideas = Idea::orderBy('created_at', 'desc')
+        ->orderBy('created_at', 'desc') // 並び順を指定
+        ->paginate(12); 
+        
         return view('idea.list',compact('ideas'));
     }
 
@@ -98,6 +101,7 @@ class IdeaController extends Controller
      */
     public function edit($id)
     {
+        $user_id = Auth::id();
         $categories = Category::all();
         $idea = Idea::with(['IdeaItems', 'IdeaImages', 'IdeaReferences'])->findOrFail($id);
         return view('idea.edit',compact('categories','idea'));
@@ -118,17 +122,28 @@ class IdeaController extends Controller
         'content' => $request->content,
     ]);
 
-    // アイテムの更新
     if ($request->has('items') && is_array($request->items)) {
-        $idea->IdeaItems()->delete();
         foreach ($request->items as $item) {
-            IdeaItem::create([
-                'idea_id' => $idea->id,
-                'url' => $item['url'] ?? null,
-                'content' => $item['content'] ?? null,
-            ]);
+            if (isset($item['id'])) {
+                // 既存データの更新
+                $ideaItem = IdeaItem::find($item['id']);
+                if ($ideaItem) {
+                    $ideaItem->update([
+                        'url' => $item['url'] ?? null,
+                        'content' => $item['content'] ?? null,
+                    ]);
+                }
+            } else {
+                // 新規データの作成
+                IdeaItem::create([
+                    'idea_id' => $idea->id,
+                    'url' => $item['url'] ?? null,
+                    'content' => $item['content'] ?? null,
+                ]);
+            }
         }
     }
+    
 
     // 参考データの更新
     if ($request->has('references') && is_array($request->references)) {
@@ -142,27 +157,29 @@ class IdeaController extends Controller
         }
     }
 
-    // 画像の更新
     if ($request->hasFile('images') && is_array($request->file('images'))) {
-        // 古い画像を削除
-        if ($idea->images && $idea->images->isNotEmpty()) {
-            foreach ($idea->images as $image) {
-                Storage::disk('public')->delete($image->image_path);
-                $image->delete();
+        foreach ($request->file('images') as $index => $file) {
+            // 古い画像の削除
+            $oldImage = $idea->ideaImages[$index] ?? null;
+            if ($oldImage) {
+                $relativePath = str_replace('/storage/', '', $oldImage->image_path);
+                Storage::disk('public')->delete($relativePath); // 実ファイルの削除
+                $oldImage->delete(); // レコードの削除
             }
-        }
-
-        // 新しい画像を保存
-        foreach ($request->file('images') as $file) {
-            $imagePath = $file->store('idea_images', 'public');
-            $imageUrl = Storage::url($imagePath);
-
+    
+            // 新しい画像の保存
+            $imagePath = $file->store('idea_images', 'public'); // ファイル保存
+            $imageUrl = '/storage/' . $imagePath; // /storage/...形式のURL生成
+    
+            // データベースに保存
             IdeaImage::create([
                 'idea_id' => $idea->id,
                 'image_path' => $imageUrl,
             ]);
         }
     }
+    
+    
 
     return redirect()->route('idea.detail', $id)->with('success', 'アイディアを更新しました！');
 }
@@ -186,15 +203,15 @@ class IdeaController extends Controller
 /**
  * Display a listing of the user's ideas.
  */
-    public function myidea()
-    {
-        $userId = Auth::id();
+public function myidea()
+{
+    $userId = Auth::id();
 
-        $ideas = Idea::where('user_id', $userId)
-            ->orderBy('created_at', 'desc')                   
-            ->get();
+    $ideas = Idea::where('user_id', $userId)
+        ->orderBy('created_at', 'desc') // 並び順を指定
+        ->paginate(12); // ページネーション
 
-        return view('idea.myidea', compact('ideas'));
-    }
+    return view('idea.myidea', ['ideas' => $ideas]);
+}
 }
 

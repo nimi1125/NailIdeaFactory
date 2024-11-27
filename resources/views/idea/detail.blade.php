@@ -21,7 +21,7 @@
                     <p class="text-2xl">{{ $idea->content ?? '' }}</p>
                 </div>
 
-                <div class="ideaImagesArea">
+                <div class="ideaImagesArea mb-5">
                     <h4 class="detail titH4 relative">参考画像</h4>
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
                         @foreach ($idea->ideaImages as $image)
@@ -29,13 +29,12 @@
                                 <div class="ideaImageItem">
                                     <img src="{{ asset($image->image_path) }}" alt="アイデア参考画像" class="ideaImage">
                                 </div>
-                                <p>{{ $image->content ?? '説明なし' }}</p>
                             </div>
                         @endforeach
                     </div>
                 </div>
 
-                <div class="idea-references">
+                <div class="idea-references mb-5">
                     <h4 class="detail titH4 relative">参考デザイン</h4>
                     @foreach ($idea->IdeaReferences as $reference)
                         <div class="reference-block mb-2">
@@ -55,6 +54,9 @@
                     @endforeach
                 </div>
             </div>
+        </div>
+        <div class="btnArea max-w-7xl mx-auto mt-5 text-center">
+            <a href="{{ route('idea.index') }}" class="btn02">一覧にもどる</a>
         </div>
         @if(Auth::id() === $idea->user->id )
             <div class="btnArea max-w-7xl mx-auto mt-5 text-center">
