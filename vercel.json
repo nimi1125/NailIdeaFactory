@@ -1,40 +1,33 @@
 {
-    "regions": [
-        "hnd1"
-    ],
-    "builds": [
-        {
-            "src": "/api/index.php",
-            "use": "vercel-php@0.7.3"
-        },
-        {
-            "src": "/public/**",
-            "use": "@vercel/static"
-        }
-    ],
+    "version": 2,
+    "framework": null,
+    "functions": {
+        "api/index.php": { "runtime": "vercel-php@0.6.2" }
+    },
     "routes": [
         {
             "src": "/build/assets/(.*)",
             "dest": "/public/build/assets/$1"
         },
         {
-            "src": "/favicon.ico",
-            "dest": "/public/favicon.ico"
+            "src": "/img/(.*)",
+            "dest": "/public/img/$1"
         },
         {
-            "src": "/robots.txt",
-            "dest": "/public/robots.txt"
+            "src": "/favicon.ico",
+            "dest": "/public/favicon.ico"
         },
         {
             "src": "/(.*)",
             "dest": "/api/index.php"
         }
     ],
-    "buildCommand": "./.vercel/build.sh",
-    "outputDirectory": "public",
     "env": {
+        "APP_ENV": "production",
+        "APP_DEBUG": "true",
         "APP_NAME": "Laravel Vercel",
-        "APP_DEBUG": "false",
+        "APP_KEY": "base64:PcU48eRjqKPfWJWYJfoSt4FzXnC9uFGiBRGjtVmAw78=",
+        "APP_URL": "https://nail-idea-factory.vercel.app",
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",
         "APP_PACKAGES_CACHE": "/tmp/packages.php",
