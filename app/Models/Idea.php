@@ -16,6 +16,11 @@ class Idea extends Model
         return $this->belongsTo('App\Models\User', 'user_id', 'id');
     }
 
+    public function coverageRanges()
+    {
+        return $this->belongsTo('App\Models\CoverageRanges', 'coverage_range_id', 'id');
+    }
+
     
     public function category()
     {
