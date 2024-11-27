@@ -33,6 +33,8 @@
 ・他の人が登録したデザインも確認することができます。
 
 ### 今後の実装予定
+・画像などの複数登録調整
+
 ・デザインの公開範囲の変更
 ネイリストの方への共有などが必要な時は、公開に設定、自分だけが確認したかったら非公開に設定など、用途によって公開範囲を変更できるようにします。
 
@@ -45,10 +47,11 @@
 
 ### アプリ表示側イメージ
 ![スクリーンショット 2024-11-18 23 59 47](https://github.com/user-attachments/assets/334bb3fd-886d-4780-aeb2-129706933b95)
-![localhost_dashboard](https://github.com/user-attachments/assets/c5c032fa-ee58-4ea9-99e7-63a2e39d5407)
-![スクリーンショット 2024-11-19 0 00 17](https://github.com/user-attachments/assets/fc875aa0-95de-49da-9fda-85ecc55984b5)
+![localhost_dashboard (1)](https://github.com/user-attachments/assets/3562838b-76f3-4fd4-ba28-2100bcfab9ca)
+![localhost_idea (1)](https://github.com/user-attachments/assets/1e9fd47d-bc87-4841-b098-9620d0294035)
 
 ### アプリURL
+※デプロイ中につき、後ほど記載
 #### URL　：
 #### テストアカウント
 ~~~
