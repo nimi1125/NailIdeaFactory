@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
             [
                 'id' => '1',
                 'idea_id' => '1',
-                'url' => 'https://example.com/reference1',
+                'url' => '/storage/idea_images/reference1.jpg',
                 'content' => '参考画像: フレンチネイルデザイン',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -64,7 +64,7 @@ class DatabaseSeeder extends Seeder
             [
                 'id' => '2',
                 'idea_id' => '2',
-                'url' => 'https://example.com/reference2',
+                'url' => '/storage/idea_images/reference2.jpg',
                 'content' => '参考画像: ビジューネイルデザイン',
                 'created_at' => now(),
                 'updated_at' => now(),
