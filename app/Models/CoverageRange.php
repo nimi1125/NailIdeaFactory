@@ -6,11 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class CoverageRange extends Model
 {
-    protected $table = 'coverage_ranges';
-    protected $fillable = ['idea_id','status']; 
-
-    public function idea()
+    public function ideas()
     {
-        return $this->belongsTo(Idea::class, 'idea_id');
+        return $this->hasMany(Idea::class, 'coverage_range_id');
     }
 }
