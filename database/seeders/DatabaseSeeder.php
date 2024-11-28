@@ -17,16 +17,20 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
+        DB::table('users')->insert([
             [
                 'name' => 'Test',
                 'email' => 'test@test.com',
                 'password' => Hash::make('12345test'),
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'name' => 'Test2',
                 'email' => 'test2@test.com',
                 'password' => Hash::make('22222test'),
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ]);
 
