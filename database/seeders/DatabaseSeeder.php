@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
@@ -17,8 +18,9 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Test',
+            'email' => 'test@test.com',
+            'password' => Hash::make('12345test'),
         ]);
 
         // ideas テーブル
@@ -47,8 +49,8 @@ class DatabaseSeeder extends Seeder
 
         // coverage_ranges テーブル
         DB::table('coverage_ranges')->insert([
-            ['id' => '1', 'idea_id' => '1', 'status' => 'public', 'created_at' => now(), 'updated_at' => now()],
-            ['id' => '2', 'idea_id' => '2', 'status' => 'private', 'created_at' => now(), 'updated_at' => now()],
+            ['id' => '1', 'status' => 'public', 'created_at' => now(), 'updated_at' => now()],
+            ['id' => '2', 'status' => 'private', 'created_at' => now(), 'updated_at' => now()],
         ]);
 
         // idea_references テーブル
