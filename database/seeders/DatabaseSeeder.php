@@ -18,9 +18,37 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         User::factory()->create([
-            'name' => 'Test',
-            'email' => 'test@test.com',
-            'password' => Hash::make('12345test'),
+            [
+                'name' => 'Test',
+                'email' => 'test@test.com',
+                'password' => Hash::make('12345test'),
+            ],
+            [
+                'name' => 'Test2',
+                'email' => 'test2@test.com',
+                'password' => Hash::make('22222test'),
+            ],
+        ]);
+
+        DB::table('categories')->insert([
+            [
+                'id' => '1', 
+                'name' => 'シンプルネイル',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => '2',
+                'name' => 'ビジューデザイン',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => '3',
+                'name' => 'フレンチネイル',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
 
         // ideas テーブル
@@ -45,6 +73,36 @@ class DatabaseSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'id' => '3',
+                'user_id' => '1',
+                'category_id' => '3',
+                'coverage_range_id' => '1',
+                'title' => '秋ネイル',
+                'content' => 'アクセントにビジューを使ったゴージャスなデザイン。',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => '4',
+                'user_id' => '1',
+                'category_id' => '2',
+                'coverage_range_id' => '2',
+                'title' => 'シンプルネイル',
+                'content' => 'シンプルなデザインのネイル',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => '5',
+                'user_id' => '1',
+                'category_id' => '3',
+                'coverage_range_id' => '1',
+                'title' => 'ビジューネイル',
+                'content' => 'アクセントにビジューを使ったゴージャスなデザイン。',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
 
         // coverage_ranges テーブル
@@ -58,16 +116,40 @@ class DatabaseSeeder extends Seeder
             [
                 'id' => '1',
                 'idea_id' => '1',
-                'url' => '/storage/idea_images/reference1.jpg',
-                'content' => '参考画像: フレンチネイルデザイン',
+                'url' => 'https://example.com/item1',
+                'content' => 'フレンチネイルデザイン',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'id' => '2',
                 'idea_id' => '2',
-                'url' => '/storage/idea_images/reference2.jpg',
-                'content' => '参考画像: ビジューネイルデザイン',
+                'url' => 'https://example.com/item2',
+                'content' => 'ビジューネイルデザイン',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => '3',
+                'idea_id' => '3',
+                'url' => 'https://example.com/item3',
+                'content' => 'ビジューネイルデザイン',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => '4',
+                'idea_id' => '4',
+                'url' => 'https://example.com/item4',
+                'content' => 'ビジューネイルデザイン',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => '5',
+                'idea_id' => '5',
+                'url' => 'https://example.com/item5',
+                'content' => 'ビジューネイルデザイン',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -91,6 +173,30 @@ class DatabaseSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'id' => '3',
+                'idea_id' => '2',
+                'url' => 'https://example.com/item2',
+                'content' => '使用するパーツ: ビジューセット',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => '4',
+                'idea_id' => '2',
+                'url' => 'https://example.com/item2',
+                'content' => '使用するパーツ: ビジューセット',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => '5',
+                'idea_id' => '2',
+                'url' => 'https://example.com/item2',
+                'content' => '使用するパーツ: ビジューセット',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
 
         // idea_images テーブル
@@ -98,14 +204,35 @@ class DatabaseSeeder extends Seeder
             [
                 'id' => '1',
                 'idea_id' => '1',
-                'image_path' => '/images/ideas/1_image1.jpg',
+                'image_path' => 'public/img/storage/ideas/1_image1.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'id' => '2',
                 'idea_id' => '2',
-                'image_path' => '/images/ideas/2_image1.jpg',
+                'image_path' => 'public/img/storage/ideas/2_image1.jpg',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => '3',
+                'idea_id' => '3',
+                'image_path' => 'public/img/storage/ideas/3_image1.jpg',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => '4',
+                'idea_id' => '4',
+                'image_path' => 'public/img/storage/ideas/4_image1.jpg',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => '5',
+                'idea_id' => '5',
+                'image_path' => 'public/img/storage/ideas/5_image1.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

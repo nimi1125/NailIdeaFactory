@@ -71,8 +71,8 @@ class IdeaController extends Controller
         
         if ($request->hasFile('images') && is_array($request->file('images'))) {
             foreach ($request->file('images') as $file) {
-                $imagePath = $file->store('idea_images', 'public');
-                $imageUrl = Storage::url($imagePath);
+                $imagePath = $file->store('public/img/storage/');
+                $imageUrl = '/img/storage/' . $imagePath; 
         
                 IdeaImage::create([
                     'idea_id' => $idea->id,
@@ -162,14 +162,14 @@ class IdeaController extends Controller
             // 古い画像の削除
             $oldImage = $idea->ideaImages[$index] ?? null;
             if ($oldImage) {
-                $relativePath = str_replace('/storage/', '', $oldImage->image_path);
-                Storage::disk('public')->delete($relativePath); // 実ファイルの削除
+                $relativePath = str_replace('/img/storage/', '', $oldImage->image_path);
+                Storage::disk('public/img/storage/')->delete($relativePath); // 実ファイルの削除
                 $oldImage->delete(); // レコードの削除
             }
     
             // 新しい画像の保存
-            $imagePath = $file->store('idea_images', 'public'); // ファイル保存
-            $imageUrl = '/storage/' . $imagePath; // /storage/...形式のURL生成
+            $imagePath = $file->store('public/img/storage/'); // ファイル保存
+            $imageUrl ='/img/storage/' . $imagePath; 
     
             // データベースに保存
             IdeaImage::create([
