@@ -12,6 +12,7 @@ use App\Models\CoverageRanges;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class IdeaController extends Controller
 {
@@ -71,15 +72,24 @@ class IdeaController extends Controller
         
         if ($request->hasFile('images') && is_array($request->file('images'))) {
             foreach ($request->file('images') as $file) {
-                $imagePath = $file->store('public/img/storage/');
-                $imageUrl = '/img/storage/' . $imagePath; 
+                // 一意な名前を生成
+                $imageName = uniqid() . '_' . $file->getClientOriginalName();
+                $filePath = 'images/' . $imageName; // S3内のディレクトリとファイル名
         
+                // S3にアップロード
+                Storage::disk('s3')->put($filePath, file_get_contents($file));
+        
+                // S3の公開URLを取得
+                $imageUrl = Storage::disk('s3')->url($filePath);
+        
+                // データベースに記録
                 IdeaImage::create([
                     'idea_id' => $idea->id,
-                    'image_path' => $imageUrl,
+                    'image_path' => $imageUrl, // 公開URLを保存
                 ]);
             }
         }
+        
         
     
         return redirect()->route('idea.create')->with('success', 'アイデアを登録しました！');
@@ -157,19 +167,45 @@ class IdeaController extends Controller
         }
     }
 
+
     if ($request->hasFile('images') && is_array($request->file('images'))) {
         foreach ($request->file('images') as $index => $file) {
             // 古い画像の削除
             $oldImage = $idea->ideaImages[$index] ?? null;
             if ($oldImage) {
                 $relativePath = str_replace('/img/storage/', '', $oldImage->image_path);
-                Storage::disk('public/img/storage/')->delete($relativePath); // 実ファイルの削除
-                $oldImage->delete(); // レコードの削除
+    
+                // S3から古い画像を削除
+                if (Storage::disk('s3')->exists($relativePath)) {
+                    Storage::disk('s3')->delete($relativePath);
+                }
+    
+                // データベースレコードの削除
+                $oldImage->delete();
             }
     
             // 新しい画像の保存
-            $imagePath = $file->store('public/img/storage/'); // ファイル保存
-            $imageUrl ='/img/storage/' . $imagePath; 
+            $imageName = uniqid() . '_' . $file->getClientOriginalName();
+            $filePath = 'images/' . $imageName; // S3内のパス（ディレクトリを指定する場合）
+    
+            // S3にアップロード
+            Storage::disk('s3')->put($filePath, file_get_contents($file));
+    
+            // S3の公開URLを取得
+            $imageUrl = Storage::disk('s3')->url($filePath);
+    
+            // データベースに新しい画像を保存
+            IdeaImage::create([
+                'idea_id' => $idea->id,
+                'image_path' => $imageUrl,
+            ]);
+        }
+    }
+    
+            // 新しい画像の保存
+            $imageName = uniqid() . '_' . $file->getClientOriginalName(); // ユニークなファイル名を作成
+            $file->move($storagePath, $imageName); // public/img/storage/ に直接保存
+            $imageUrl = '/img/storage/' . $imageName; // 保存された画像のURLを生成
     
             // データベースに保存
             IdeaImage::create([
