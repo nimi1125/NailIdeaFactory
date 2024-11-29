@@ -121,109 +121,92 @@ class IdeaController extends Controller
      * Update the specified resource in storage.
      */
     public function update(IdeaRequest $request, $id)
-{
-    // 対象のアイディアを取得
-    $idea = Idea::with(['IdeaItems', 'IdeaImages', 'IdeaReferences'])->findOrFail($id);
-
-    // 基本情報の更新
-    $idea->update([
-        'category_id' => $request->category_id,
-        'title' => $request->title,
-        'content' => $request->content,
-    ]);
-
-    if ($request->has('items') && is_array($request->items)) {
-        foreach ($request->items as $item) {
-            if (isset($item['id'])) {
-                // 既存データの更新
-                $ideaItem = IdeaItem::find($item['id']);
-                if ($ideaItem) {
-                    $ideaItem->update([
+    {
+        // 対象のアイディアを取得
+        $idea = Idea::with(['IdeaItems', 'IdeaImages', 'IdeaReferences'])->findOrFail($id);
+    
+        // 基本情報の更新
+        $idea->update([
+            'category_id' => $request->category_id,
+            'title' => $request->title,
+            'content' => $request->content,
+        ]);
+    
+        // アイテムの更新または新規作成
+        if ($request->has('items') && is_array($request->items)) {
+            foreach ($request->items as $item) {
+                if (isset($item['id'])) {
+                    // 既存データの更新
+                    $ideaItem = IdeaItem::find($item['id']);
+                    if ($ideaItem) {
+                        $ideaItem->update([
+                            'url' => $item['url'] ?? null,
+                            'content' => $item['content'] ?? null,
+                        ]);
+                    }
+                } else {
+                    // 新規データの作成
+                    IdeaItem::create([
+                        'idea_id' => $idea->id,
                         'url' => $item['url'] ?? null,
                         'content' => $item['content'] ?? null,
                     ]);
                 }
-            } else {
-                // 新規データの作成
-                IdeaItem::create([
+            }
+        }
+    
+        // 参考データの更新
+        if ($request->has('references') && is_array($request->references)) {
+            // 既存の参考データを削除
+            $idea->IdeaReferences()->delete();
+            foreach ($request->references as $reference) {
+                IdeaReference::create([
                     'idea_id' => $idea->id,
-                    'url' => $item['url'] ?? null,
-                    'content' => $item['content'] ?? null,
+                    'url' => $reference['url'] ?? null,
+                    'content' => $reference['content'] ?? null,
                 ]);
             }
         }
-    }
     
-
-    // 参考データの更新
-    if ($request->has('references') && is_array($request->references)) {
-        $idea->IdeaReferences()->delete();
-        foreach ($request->references as $reference) {
-            IdeaReference::create([
-                'idea_id' => $idea->id,
-                'url' => $reference['url'] ?? null,
-                'content' => $reference['content'] ?? null,
-            ]);
-        }
-    }
-
-
-    if ($request->hasFile('images') && is_array($request->file('images'))) {
-        foreach ($request->file('images') as $index => $file) {
-            // 古い画像の削除
-            $oldImage = $idea->ideaImages[$index] ?? null;
-            if ($oldImage) {
-                $relativePath = str_replace('/img/storage/', '', $oldImage->image_path);
-    
-                // S3から古い画像を削除
-                if (Storage::disk('s3')->exists($relativePath)) {
-                    Storage::disk('s3')->delete($relativePath);
+        // 画像の更新
+        if ($request->hasFile('images') && is_array($request->file('images'))) {
+            foreach ($request->file('images') as $index => $file) {
+                // 古い画像の削除
+                $oldImage = $idea->ideaImages[$index] ?? null;
+                if ($oldImage) {
+                    // S3から古い画像を削除
+                    $relativePath = str_replace('/img/storage/', '', $oldImage->image_path);
+                    if (Storage::disk('s3')->exists($relativePath)) {
+                        Storage::disk('s3')->delete($relativePath);
+                    }
+                    // データベースレコードの削除
+                    $oldImage->delete();
                 }
     
-                // データベースレコードの削除
-                $oldImage->delete();
+                // 新しい画像の保存
+                $imageName = uniqid() . '_' . $file->getClientOriginalName();
+                $filePath = 'images/' . $imageName; // S3内のパス
+                Storage::disk('s3')->put($filePath, file_get_contents($file)); // S3にアップロード
+                $imageUrl = Storage::disk('s3')->url($filePath); // 公開URL取得
+    
+                // データベースに保存
+                IdeaImage::create([
+                    'idea_id' => $idea->id,
+                    'image_path' => $imageUrl,
+                ]);
             }
-    
-            // 新しい画像の保存
-            $imageName = uniqid() . '_' . $file->getClientOriginalName();
-            $filePath = 'images/' . $imageName; // S3内のパス（ディレクトリを指定する場合）
-    
-            // S3にアップロード
-            Storage::disk('s3')->put($filePath, file_get_contents($file));
-    
-            // S3の公開URLを取得
-            $imageUrl = Storage::disk('s3')->url($filePath);
-    
-            // データベースに新しい画像を保存
-            IdeaImage::create([
-                'idea_id' => $idea->id,
-                'image_path' => $imageUrl,
-            ]);
         }
+    
+        // 処理完了後にリダイレクト
+        return redirect()->route('idea.detail', $id)->with('success', 'アイディアを更新しました！');
     }
     
-            // 新しい画像の保存
-            $imageName = uniqid() . '_' . $file->getClientOriginalName(); // ユニークなファイル名を作成
-            $file->move($storagePath, $imageName); // public/img/storage/ に直接保存
-            $imageUrl = '/img/storage/' . $imageName; // 保存された画像のURLを生成
-    
-            // データベースに保存
-            IdeaImage::create([
-                'idea_id' => $idea->id,
-                'image_path' => $imageUrl,
-            ]);
-        }
-    }
-    
-    
-
-    return redirect()->route('idea.detail', $id)->with('success', 'アイディアを更新しました！');
-}
 
 
     /**
      * Remove the specified resource from storage.
      */
+    
     public function destroy(string $id)
     {
         $idea = Idea::with(['IdeaItems', 'IdeaImages', 'IdeaReferences'])->find($id);
@@ -236,18 +219,18 @@ class IdeaController extends Controller
             ->with('status','アイディアを削除しました。');
     }
 
-/**
- * Display a listing of the user's ideas.
- */
-public function myidea()
-{
-    $userId = Auth::id();
+    /**
+     * Display a listing of the user's ideas.
+     */
+    public function myidea()
+    {
+        $userId = Auth::id();
 
-    $ideas = Idea::where('user_id', $userId)
-        ->orderBy('created_at', 'desc') // 並び順を指定
-        ->paginate(12); // ページネーション
+        $ideas = Idea::where('user_id', $userId)
+            ->orderBy('created_at', 'desc') // 並び順を指定
+            ->paginate(12); // ページネーション
 
-    return view('idea.myidea', ['ideas' => $ideas]);
-}
+        return view('idea.myidea', ['ideas' => $ideas]);
+    }
 }
 
