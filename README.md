@@ -111,3 +111,8 @@ docker run --rm \
 ./vendor/bin/sail　artisan db:seed
 ~~~
 
+※エイリアスを変更
+sailコマンドがsail~で実行できるようになる 例：sail artisan migrate
+~~~
+alias sail="vendor/bin/sail"
+~~~
