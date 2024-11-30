@@ -72,19 +72,21 @@ class IdeaController extends Controller
         if ($request->hasFile('images') && is_array($request->file('images'))) {
             foreach ($request->file('images') as $file) {
                 // 一意な名前を生成
-                $imageName = uniqid() . '_' . $file->getClientOriginalName();
-                $filePath = 'images/' . $imageName; // S3内のディレクトリとファイル名
+                // $imageName = uniqid() . '_' . $file->getClientOriginalName();
+                // $filePath = 'images/' . $imageName; 
         
                 // S3にアップロード
-                Storage::disk('s3')->put($filePath, file_get_contents($file));
+                // Storage::disk('s3')->put($filePath, file_get_contents($file));
         
                 // S3の公開URLを取得
-                $imageUrl = Storage::disk('s3')->url($filePath);
+                // $imageUrl = Storage::disk('s3')->url($filePath);
+
+                $imagePath = 'img/2_image1.jpg'; 
         
                 // データベースに記録
                 IdeaImage::create([
                     'idea_id' => $idea->id,
-                    'image_path' => $imageUrl, // 公開URLを保存
+                    'image_path' => $imagePath, 
                 ]);
             }
         }
