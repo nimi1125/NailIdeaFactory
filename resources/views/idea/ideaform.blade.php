@@ -46,6 +46,7 @@
     <label for="image" class="text-2xl font-semibold block mb-3">参考画像</label>
     @if(isset($idea) && $idea->ideaImages->isNotEmpty())
         {{-- 編集時のみ登録済み画像を表示 --}}
+        <em class="text-2xl">※画像変更は今はできません調整中です</em>
         <div class="mb-3">
             <h3 class="font-semibold text-lg">登録済み画像</h3>
             @foreach ($idea->ideaImages as $index => $image)
