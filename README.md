@@ -51,12 +51,11 @@
 ![localhost_idea (1)](https://github.com/user-attachments/assets/1e9fd47d-bc87-4841-b098-9620d0294035)
 
 ### アプリURL
-※デプロイ中につき、後ほど記載
-#### URL　：
+https://nailideafactory-app.vercel.app/
 #### テストアカウント
 ~~~
-    ID:test@test.com
-    PASS:12345test
+    ID:yamadahanako@example.com
+    PASS:Password
 ~~~
 
 ## 開発環境の構築方法
