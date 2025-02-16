@@ -20,7 +20,7 @@
         @endif
     </head>
     <body class="home">
-        <header class="homeInr relative">
+        <div class="homeInr relative">
             <div class="topCvArea flex flex-col items-center justify-center">
                 <!-- 背景画像の表示エリア -->
                 <img src="{{ asset('img/top_cv.JPG') }}" alt="トップカバー" class="w-full h-full object-cover">
@@ -35,11 +35,11 @@
                             <!-- ナビゲーションメニュー -->
                             <nav class="flex flex-1 justify-end -mx-3 text-cyan-950">
                                 @auth
-                                    <a href="{{ url('/dashboard') }}" class="btn01">Dashboard</a>
+                                    <a href="{{ url('/dashboard') }}" class="btn01 text-xs md:text-base px-3 md:px-10">Dashboard</a>
                                 @else
-                                    <a href="{{ route('login') }}" class="btn01">Log in</a>
+                                    <a href="{{ route('login') }}" class="btn01  text-xs md:text-base px-3 md:px-10">Log in</a>
                                     @if (Route::has('register'))
-                                        <a href="{{ route('register') }}" class="btn01 ml-3">Register</a>
+                                        <a href="{{ route('register') }}" class="btn01 ml-3 text-xs md:text-base px-3 md:px-10">Register</a>
                                     @endif
                                 @endauth
                             </nav>
@@ -59,7 +59,7 @@
                     </div>
                 </div>
             </div>
-        </header>
+        </div>
     
         <!-- メインコンテンツ -->
         {{-- <main class="max-w-2xl px-6 lg:max-w-7xl w-full pt-20 pb-20 mx-auto">

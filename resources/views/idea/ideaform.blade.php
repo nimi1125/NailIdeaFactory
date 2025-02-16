@@ -1,5 +1,5 @@
 <div class="mb-4">
-    <label class="text-2xl font-semibold mt-5" for="title">タイトル</label>
+    <label class="text-2xl font-semibold mt-5 formLabel" for="title">Title<span class="text-sm ml-1 font-normal">題名</span></label>
     <input 
         type="text" 
         name="title" 
@@ -13,7 +13,7 @@
 </div>
 
 <div class="mb-4">
-    <label for="category_id" class="text-2xl font-semibold block mb-3">カテゴリ</label>
+    <label for="category_id" class="text-2xl font-semibold block formLabel">Category<span class="text-sm ml-1 font-normal">カテゴリ</span></label>
     <select 
         id="category_id" 
         name="category_id" 
@@ -30,23 +30,22 @@
 </div>
 
 <div class="mb-4">
-    <label class="text-2xl font-semibold mt-5" for="content">デザイン詳細</label>
+    <label class="text-2xl font-semibold mt-5 inline-block formLabel" for="content">Design Details<span class="text-sm ml-1 font-normal inline-block">デザイン詳細</span></label>
     <textarea 
         name="content" 
         id="content" 
         class="w-full p-3 border border-gray-300 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-blue-500" 
-        placeholder="説明">{{ old('content', $idea->content ?? '') }}</textarea>
+        placeholder="デザインの説明などを記載してください">{{ old('content', $idea->content ?? '') }}</textarea>
     @error('content')
         <div class="text-red-600">{{ $message }}</div>
     @enderror
 </div>
 
 {{-- 画像 --}}
-<div class="mb-4">
-    <label for="image" class="text-2xl font-semibold block mb-3">参考画像</label>
+<div class="mb-5">
+    <label for="image" class="text-2xl font-semibold block inline-block formLabel">Register reference image<span class="text-sm ml-1 font-normal inline-block">参考画像を登録</span></label>
     @if(isset($idea) && $idea->ideaImages->isNotEmpty())
         {{-- 編集時のみ登録済み画像を表示 --}}
-        <em class="text-2xl">※画像変更は今はできません調整中です</em>
         <div class="mb-3">
             <h3 class="font-semibold text-lg">登録済み画像</h3>
             @foreach ($idea->ideaImages as $index => $image)
@@ -70,21 +69,23 @@
 
     {{-- 新しい画像を追加 --}}
     <div class="mb-3">
-        <h3 class="font-semibold text-lg">{{ isset($idea) ? '新しい画像を追加' : '画像を登録' }}</h3>
+        <h3 class="font-semibold text-lg">{{ isset($idea) ? '新しい画像を追加' : '' }}</h3>
         <input 
             type="file" 
             name="images[]" 
             multiple
-            class="block text-sm text-gray-500">
+            class="block text-sm text-gray-500 imgInput">
     </div>
 
     @error('images')
         <div class="text-red-600">{{ $message }}</div>
     @enderror
 </div>
+<hr>
 
 {{-- 参考情報 --}}
 <div id="references-container">
+    <label for="image" class="text-2xl font-semibold block inline-block formLabel">Reference design<span class="text-sm ml-1 font-normal inline-block">参考デザインについて登録</span></label>
     @if(isset($idea) && $idea->IdeaReferences->isNotEmpty())
         @foreach ($idea->IdeaReferences as $index => $reference)
             @include('partials.reference', ['index' => $index, 'reference' => $reference])
@@ -94,9 +95,11 @@
         @include('partials.reference', ['index' => 0, 'reference' => null])
     @endif
 </div>
+<hr>
 
 {{-- アイテム --}}
 <div id="items-container">
+    <label for="image" class="text-2xl font-semibold block inline-block formLabel">Items to Use<span class="text-sm ml-1 font-normal inline-block">使いたいアイテムについて登録</span></label>
     @if(isset($idea) && $idea->IdeaItems->isNotEmpty())
         @foreach ($idea->IdeaItems as $index => $IdeaItem)
             @include('partials.item', ['index' => $index, 'item' => $IdeaItem])
@@ -109,5 +112,5 @@
 
 {{-- 登録ボタン --}}
 <div class="mt-4">
-    <button type="submit" class="btn02 ml-3">登録</button>
+    <button type="submit" class="btn02 ml-3">Submit<span class="text-sm ml-1 font-normal inline-block">登録</span></button>
 </div>

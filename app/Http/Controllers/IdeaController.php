@@ -12,6 +12,7 @@ use App\Models\CoverageRanges;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class IdeaController extends Controller
 {
@@ -41,60 +42,53 @@ class IdeaController extends Controller
      */
     public function store(IdeaRequest $request)
     {
-        $idea = Idea::create([
-            'user_id' => auth()->id(),
-            'category_id' => $request->category_id,
-            'title' => $request->title,
-            'content' => $request->content,
-        ]);
+        DB::transaction(function () use ($request) {
+            $idea = Idea::create([
+                'user_id' => auth()->id(),
+                'category_id' => $request->category_id,
+                'title' => $request->title,
+                'content' => $request->content,
+            ]);
     
-        if ($request->has('items') && is_array($request->items)) {
-            foreach ($request->items as $item) {
+            // items 保存
+            foreach ($request->items ?? [] as $item) {
                 IdeaItem::create([
                     'idea_id' => $idea->id,
                     'url' => $item['url'] ?? null,
                     'content' => $item['content'] ?? null,
                 ]);
             }
-        }
-        
-        if ($request->has('references') && is_array($request->references)) {
-            foreach ($request->references as $reference) {
+    
+            // references 保存
+            foreach ($request->references ?? [] as $reference) {
                 IdeaReference::create([
                     'idea_id' => $idea->id,
                     'url' => $reference['url'] ?? null,
                     'content' => $reference['content'] ?? null,
                 ]);
             }
-        }
     
-        
-        if ($request->hasFile('images') && is_array($request->file('images'))) {
-            foreach ($request->file('images') as $file) {
-                // 一意な名前を生成
-                // $imageName = uniqid() . '_' . $file->getClientOriginalName();
-                // $filePath = 'images/' . $imageName; 
-        
-                // S3にアップロード
-                // Storage::disk('s3')->put($filePath, file_get_contents($file));
-        
-                // S3の公開URLを取得
-                // $imageUrl = Storage::disk('s3')->url($filePath);
-
-                $imagePath = 'img/2_image1.jpg'; 
-        
-                // データベースに記録
-                IdeaImage::create([
-                    'idea_id' => $idea->id,
-                    'image_path' => $imagePath, 
-                ]);
+            // images 保存
+            if ($request->hasFile('images') && is_array($request->file('images'))) {
+                foreach ($request->file('images') as $file) {
+                    // 保存先パスを指定
+                    $filePath = $file->store('images', 'public'); // 'public/storage/images'に保存される
+    
+                    // 公開URLを生成
+                    $imageUrl = asset('storage/' . $filePath); // URL例: http://example.com/storage/images/filename.jpg
+    
+                    // データベースに記録
+                    IdeaImage::create([
+                        'idea_id' => $idea->id,
+                        'image_path' => $imageUrl,
+                    ]);
+                }
             }
-        }
-        
-        
+        });
     
         return redirect()->route('idea.create')->with('success', 'アイデアを登録しました！');
     }
+    
     
 
     /**
@@ -175,21 +169,19 @@ class IdeaController extends Controller
                 // 古い画像の削除
                 $oldImage = $idea->ideaImages[$index] ?? null;
                 if ($oldImage) {
-                    // S3から古い画像を削除
-                    $relativePath = str_replace('/img/storage/', '', $oldImage->image_path);
-                    if (Storage::disk('s3')->exists($relativePath)) {
-                        Storage::disk('s3')->delete($relativePath);
+                    // ローカルストレージから古い画像を削除
+                    $relativePath = str_replace(asset('storage/') . '/', '', $oldImage->image_path); // 相対パスを取得
+                    if (Storage::disk('public')->exists($relativePath)) {
+                        Storage::disk('public')->delete($relativePath); // 古い画像を削除
                     }
                     // データベースレコードの削除
                     $oldImage->delete();
                 }
-    
+
                 // 新しい画像の保存
-                $imageName = uniqid() . '_' . $file->getClientOriginalName();
-                $filePath = 'images/' . $imageName; // S3内のパス
-                Storage::disk('s3')->put($filePath, file_get_contents($file)); // S3にアップロード
-                $imageUrl = Storage::disk('s3')->url($filePath); // 公開URL取得
-    
+                $filePath = $file->store('images', 'public'); // ローカルストレージに保存
+                $imageUrl = asset('storage/' . $filePath); // 公開URLを生成
+
                 // データベースに保存
                 IdeaImage::create([
                     'idea_id' => $idea->id,
@@ -197,7 +189,6 @@ class IdeaController extends Controller
                 ]);
             }
         }
-    
         // 処理完了後にリダイレクト
         return redirect()->route('idea.detail', $id)->with('success', 'アイディアを更新しました！');
     }

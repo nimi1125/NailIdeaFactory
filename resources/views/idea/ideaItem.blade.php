@@ -11,7 +11,7 @@
             </div>
             <div class="postTxtItem p-4 bg-white relative">
                 <div class="flex justify-between items-center">
-                    <p class="text-sm text-white bg-gray-500 p-1">{{ $idea->category->name }}</p>
+                    <p class="text-sm col01">#{{ $idea->category->name }}</p>
                     <h4 class="text-lg font-semibold">{{ $idea->title }}</h4>
                 </div>
             </div>
