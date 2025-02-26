@@ -4,7 +4,8 @@
     "scripts": {
         "build": "vite build",
         "dev": "vite",
-        "start": "node server.js"
+        "postinstall": "npm install vite",
+        "start": "vite preview"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",
