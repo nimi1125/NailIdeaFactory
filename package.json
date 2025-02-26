@@ -20,5 +20,8 @@
     },
     "dependencies": {
         "ress": "^5.0.2"
+    },
+    "engines": {
+        "node": "22.x"
     }
 }
