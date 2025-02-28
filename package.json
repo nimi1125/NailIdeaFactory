@@ -19,6 +19,7 @@
         "vite": "^6.2.0"
     },
     "dependencies": {
+        "express": "^4.21.2",
         "ress": "^5.0.2"
     },
     "engines": {
