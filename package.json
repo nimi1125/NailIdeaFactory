@@ -2,11 +2,10 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "your-build-command",
+        "build": "vite build",
         "dev": "vite",
         "start": "node server.cjs",
-        "heroku-postbuild": "npm run build",
-        "postinstall": "npm run build"
+        "heroku-postbuild": "npm run build"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",
