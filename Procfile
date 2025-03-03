@@ -1,1 +1,1 @@
-web: node server.cjs
+web: heroku-php-apache2 public/
