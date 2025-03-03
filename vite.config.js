@@ -12,9 +12,10 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    base: '/', 
+    base: '/',
     build: {
-        outDir: 'dist', 
-        emptyOutDir: true, 
+        outDir: 'dist',
+        emptyOutDir: true,
     },
+    publicDir: 'public', 
 });
