@@ -12,9 +12,9 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    base: '/', // ここを "/" に変更
+    base: '/', 
     build: {
-        outDir: 'dist', // 出力フォルダを "dist" に設定
-        emptyOutDir: true, // 古いビルドを削除（推奨）
+        outDir: 'dist', 
+        emptyOutDir: true, 
     },
 });
