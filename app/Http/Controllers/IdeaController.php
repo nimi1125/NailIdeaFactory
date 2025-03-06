@@ -72,11 +72,11 @@ class IdeaController extends Controller
             if ($request->hasFile('images') && is_array($request->file('images'))) {
                 foreach ($request->file('images') as $file) {
                     // 保存先パスを指定
-                    $filePath = Storage::disk('s3')->putFile('example', $image, 'public');
-    
+                    $filePath = Storage::disk('s3')->putFile('example', $file, 'public');
+
                     // 公開URLを生成
-                    $imageUrl = Storage::disk('s3')->url($path);
-    
+                    $imageUrl = Storage::disk('s3')->url($filePath);
+
                     // データベースに記録
                     IdeaImage::create([
                         'idea_id' => $idea->id,
