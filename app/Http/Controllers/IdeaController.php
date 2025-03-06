@@ -73,9 +73,9 @@ class IdeaController extends Controller
                 foreach ($request->file('images') as $file) {
                     // ファイルを S3 にアップロードし、保存されたパスを取得
                     $filePath = Storage::disk('s3')->putFile('example', $file, 'public');
-
+                    dd($filePath); //
                     // 公開 URL を生成
-                    $imageUrl = Storage::disk('s3')->url($filePath); // 修正: $path → $filePath
+                    $imageUrl = Storage::disk('s3')->url($filePath); 
 
                     // データベースに記録
                     IdeaImage::create([
