@@ -82,7 +82,6 @@ class IdeaController extends Controller
                         'idea_id' => $idea->id,
                         'image_path' => $imageUrl,
                     ]);
-                    dd($filePath);
                 }
             }
         });
