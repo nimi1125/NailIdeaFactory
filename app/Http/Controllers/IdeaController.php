@@ -82,6 +82,12 @@ class IdeaController extends Controller
                         'idea_id' => $idea->id,
                         'image_path' => $imageUrl,
                     ]);
+
+                    try {
+                        $filePath = Storage::disk('s3')->putFile('example', $file, 'public');
+                    } catch (\Exception $e) {
+                        dd($e->getMessage());
+                    }
                 }
             }
         });
