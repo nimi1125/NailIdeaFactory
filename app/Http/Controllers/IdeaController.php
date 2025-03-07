@@ -82,7 +82,7 @@ class IdeaController extends Controller
                         'idea_id' => $idea->id,
                         'image_path' => $imageUrl,
                     ]);
-                    dd(Storage::disk('s3')->exists('/'));
+                    dd($filePath);
                 }
             }
         });
