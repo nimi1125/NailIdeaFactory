@@ -72,7 +72,7 @@ class IdeaController extends Controller
             if ($request->hasFile('images') && is_array($request->file('images'))) {
                 foreach ($request->file('images') as $file) {
                     // ファイルを S3 にアップロードし、保存されたパスを取得
-                    $filePath = Storage::disk('s3')->putFile('example', $file, 'public');
+                    $filePath = Storage::disk('s3')->putFile('images', $file, 'public');
                     
                     // 公開 URL を生成
                     $imageUrl = Storage::disk('s3')->url($filePath); 
@@ -83,11 +83,6 @@ class IdeaController extends Controller
                         'image_path' => $imageUrl,
                     ]);
 
-                    try {
-                        $filePath = Storage::disk('s3')->putFile('example', $file, 'public');
-                    } catch (\Exception $e) {
-                        dd($e->getMessage());
-                    }
                 }
             }
         });
