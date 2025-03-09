@@ -53,7 +53,7 @@
 
 ### アプリURL
 #### URL　：https://nailideafactory-app-119276a88e28.herokuapp.com/
-※画像登録しても表示できないようになってしまっているので、調整中です。
+※一部調整中
 #### テストアカウント
 ~~~
     ID:yamadahanako@example.com
