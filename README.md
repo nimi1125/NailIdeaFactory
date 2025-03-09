@@ -2,17 +2,17 @@
 ## 使用技術一覧
 <p style="display: inline">
 　<!-- フロントエンドの言語一覧 -->
-    <img src="https://img.shields.io/badge/-HTML-99d1ce.svg?logo=&style=for-the-badge">
-    <img src="https://img.shields.io/badge/-CSS-1572B6.svg?logo=&style=for-the-badge">
+    <img src="https://img.shields.io/badge/-Html5-ffbf80.svg?logo=html5&style=for-the-badge">
+    <img src="https://img.shields.io/badge/-Css3-1572B6.svg?logo=css3&style=for-the-badge">
     <img src="https://img.shields.io/badge/-Javascript-fff5a1.svg?logo=javascript&style=for-the-badge">
   <!-- フロントエンドのフレームワーク一覧 -->
-<!--   <img src="https://img.shields.io/badge/-Next.js-000000.svg?logo=next.js&style=for-the-badge"> -->
+<img src="https://img.shields.io/badge/-Node.js-a9fca9.svg?logo=node.js&style=for-the-badge">
   <!-- バックエンドの言語一覧 -->
   <img src="https://img.shields.io/badge/-Php-cccfff.svg?logo=php&style=for-the-badge">
   <!-- バックエンドのフレームワーク一覧 -->
   <img src="https://img.shields.io/badge/-Laravel-f3a68c.svg?logo=laravel&style=for-the-badge">
   <!-- ミドルウェア一覧 -->
-  <img src="https://img.shields.io/badge/-MySQL-4479A1.svg?logo=mysql&style=for-the-badge&logoColor=white">
+  <img src="https://img.shields.io/badge/-Postgresql-a7d6fc.svg?logo=postgresql&style=for-the-badge">
   <!-- インフラ一覧 -->
   <img src="https://img.shields.io/badge/-Docker-1488C6.svg?logo=docker&style=for-the-badge">
 </p>
@@ -48,15 +48,16 @@
 ### アプリ表示側イメージ
 ![スクリーンショット 2024-11-18 23 59 47](https://github.com/user-attachments/assets/334bb3fd-886d-4780-aeb2-129706933b95)
 ![localhost_dashboard (1)](https://github.com/user-attachments/assets/3562838b-76f3-4fd4-ba28-2100bcfab9ca)
-![localhost_idea (1)](https://github.com/user-attachments/assets/1e9fd47d-bc87-4841-b098-9620d0294035)
+![Image](https://github.com/user-attachments/assets/bb827f6b-ada3-4a88-96b3-ff1041ddc1d5)
+![Image](https://github.com/user-attachments/assets/496cbebf-d6ed-48a2-afa3-73b87cd40577)
 
 ### アプリURL
-※デプロイ中につき、後ほど記載
-#### URL　：
+#### URL　：https://nailideafactory-app-119276a88e28.herokuapp.com/
+※画像登録しても表示できないようになってしまっているので、調整中です。
 #### テストアカウント
 ~~~
-    ID:test@test.com
-    PASS:12345test
+    ID:yamadahanako@example.com
+    PASS:Password
 ~~~
 
 ## 開発環境の構築方法
