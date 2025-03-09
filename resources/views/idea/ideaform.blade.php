@@ -56,11 +56,6 @@
                         type="file" 
                         name="images[{{ $index }}]" 
                         class="block text-sm text-gray-500">
-                    <input 
-                        type="checkbox" 
-                        name="delete_images[{{ $index }}]" 
-                        value="{{ $image->id }}" 
-                        class="ml-2">
                 </div>
             @endforeach
         </div>
