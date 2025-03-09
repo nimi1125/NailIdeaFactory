@@ -3,16 +3,16 @@
 <p style="display: inline">
 　<!-- フロントエンドの言語一覧 -->
     <img src="https://img.shields.io/badge/-Html5-ffbf80.svg?logo=html5&style=for-the-badge">
-    <img src="https://img.shields.io/badge/-Html5-ffbf80.svg?logo=html5&style=for-the-badge">
+    <img src="https://img.shields.io/badge/-Css3-1572B6.svg?logo=css3&style=for-the-badge">
     <img src="https://img.shields.io/badge/-Javascript-fff5a1.svg?logo=javascript&style=for-the-badge">
   <!-- フロントエンドのフレームワーク一覧 -->
-<!--   <img src="https://img.shields.io/badge/-Next.js-000000.svg?logo=next.js&style=for-the-badge"> -->
+<img src="https://img.shields.io/badge/-Node.js-a9fca9.svg?logo=node.js&style=for-the-badge">
   <!-- バックエンドの言語一覧 -->
   <img src="https://img.shields.io/badge/-Php-cccfff.svg?logo=php&style=for-the-badge">
   <!-- バックエンドのフレームワーク一覧 -->
   <img src="https://img.shields.io/badge/-Laravel-f3a68c.svg?logo=laravel&style=for-the-badge">
   <!-- ミドルウェア一覧 -->
-  <img src="https://img.shields.io/badge/-MySQL-4479A1.svg?logo=mysql&style=for-the-badge&logoColor=white">
+  <img src="https://img.shields.io/badge/-Postgresql-a7d6fc.svg?logo=postgresql&style=for-the-badge">
   <!-- インフラ一覧 -->
   <img src="https://img.shields.io/badge/-Docker-1488C6.svg?logo=docker&style=for-the-badge">
 </p>
