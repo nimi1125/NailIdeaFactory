@@ -61,21 +61,20 @@
                         name="delete_images[{{ $index }}]" 
                         value="{{ $image->id }}" 
                         class="ml-2">
-                    <label for="delete_images[{{ $index }}]">この画像を削除</label>
                 </div>
             @endforeach
         </div>
     @endif
 
     {{-- 新しい画像を追加 --}}
-    <div class="mb-3">
+    <!-- <div class="mb-3">
         <h3 class="font-semibold text-lg">{{ isset($idea) ? '新しい画像を追加' : '' }}</h3>
         <input 
             type="file" 
             name="images[]" 
             multiple
             class="block text-sm text-gray-500 imgInput">
-    </div>
+    </div> -->
 
     @error('images')
         <div class="text-red-600">{{ $message }}</div>

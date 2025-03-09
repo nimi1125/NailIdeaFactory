@@ -61,7 +61,7 @@
                 </div>
             </div>
         </div>
-        <div class="dashPostArea relative max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 mt-5">
+        <!-- <div class="dashPostArea relative max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 mt-5">
             <h3 class="titH3 font-semibold">Nail Post<span class="ml-1 text-sm font-normal">ネイル投稿</span></h3>
             <p class="md:text-2xl text-lg">※準備中</p>
             <div class="flex flex-wrap">
@@ -84,6 +84,6 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </x-app-layout>

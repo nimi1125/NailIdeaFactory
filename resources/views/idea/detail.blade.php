@@ -57,7 +57,7 @@
             </div>
         </div>
         <div class="btnArea max-w-7xl mx-auto mt-5 text-center">
-            <a href="{{ route('idea.index') }}" class="font-semibold text-2xl hoverCol01">back to the list</a>
+            <a href="{{ route('idea.index') }}" class="font-semibold text-2xl hoverCol01">back to the list<span class="text-xs ml-1">一覧に戻る</span></a>
         </div>
         @if(Auth::id() === $idea->user->id )
             <div class="userBtnArea">
