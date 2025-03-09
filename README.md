@@ -48,15 +48,16 @@
 ### アプリ表示側イメージ
 ![スクリーンショット 2024-11-18 23 59 47](https://github.com/user-attachments/assets/334bb3fd-886d-4780-aeb2-129706933b95)
 ![localhost_dashboard (1)](https://github.com/user-attachments/assets/3562838b-76f3-4fd4-ba28-2100bcfab9ca)
-![localhost_idea (1)](https://github.com/user-attachments/assets/1e9fd47d-bc87-4841-b098-9620d0294035)
+![Image](https://github.com/user-attachments/assets/bb827f6b-ada3-4a88-96b3-ff1041ddc1d5)
+![Image](https://github.com/user-attachments/assets/496cbebf-d6ed-48a2-afa3-73b87cd40577)
 
 ### アプリURL
-※デプロイ中につき、後ほど記載
-#### URL　：
+※画像保存エラー一部出ているので調整中です。
+#### URL　：https://nailideafactory-app-119276a88e28.herokuapp.com/
 #### テストアカウント
 ~~~
-    ID:test@test.com
-    PASS:12345test
+    ID:yamadahanako@example.com
+    PASS:Password
 ~~~
 
 ## 開発環境の構築方法
