@@ -52,8 +52,8 @@
 ![Image](https://github.com/user-attachments/assets/496cbebf-d6ed-48a2-afa3-73b87cd40577)
 
 ### アプリURL
-※画像保存エラー一部出ているので調整中です。
 #### URL　：https://nailideafactory-app-119276a88e28.herokuapp.com/
+※画像登録しても表示できないようになってしまっているので、調整中です。
 #### テストアカウント
 ~~~
     ID:yamadahanako@example.com
