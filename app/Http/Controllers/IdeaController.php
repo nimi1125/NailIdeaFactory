@@ -71,18 +71,21 @@ class IdeaController extends Controller
             // images 保存
             if ($request->hasFile('images') && is_array($request->file('images'))) {
                 foreach ($request->file('images') as $file) {
-                    // ファイルを S3 にアップロードし、保存されたパスを取得
-                    $filePath = Storage::disk('s3')->putFile('images', $file, 'public');
-                    
+                    // ファイル名をユニークにする（タイムスタンプ+元のファイル名）
+                    $filename = time() . '_' . $file->getClientOriginalName();
+
+                    // `public/img/` に保存
+                    $filePath = public_path('img/' . $filename);
+                    $file->move(public_path('img/'), $filename);
+
                     // 公開 URL を生成
-                    $imageUrl = Storage::disk('s3')->url($filePath); 
+                    $imageUrl = asset('img/' . $filename);
 
                     // データベースに記録
                     IdeaImage::create([
                         'idea_id' => $idea->id,
                         'image_path' => $imageUrl,
                     ]);
-
                 }
             }
         });
@@ -164,24 +167,30 @@ class IdeaController extends Controller
             }
         }
     
-        // 画像の更新
+        // imageの更新
         if ($request->hasFile('images') && is_array($request->file('images'))) {
             foreach ($request->file('images') as $index => $file) {
                 // 古い画像の削除
                 $oldImage = $idea->ideaImages[$index] ?? null;
                 if ($oldImage) {
-                    // ローカルストレージから古い画像を削除
-                    $relativePath = str_replace(asset('storage/') . '/', '', $oldImage->image_path); // 相対パスを取得
-                    if (Storage::disk('public')->exists($relativePath)) {
-                        Storage::disk('public')->delete($relativePath); // 古い画像を削除
+                    // 古い画像のパスを取得
+                    $relativePath = public_path(str_replace(asset('img/'), 'img/', $oldImage->image_path));
+
+                    // 画像が存在する場合は削除
+                    if (file_exists($relativePath)) {
+                        unlink($relativePath);
                     }
-                    // データベースレコードの削除
+
+                    // データベースのレコードを削除
                     $oldImage->delete();
                 }
 
                 // 新しい画像の保存
-                $filePath = $file->store('images', 'public'); // ローカルストレージに保存
-                $imageUrl = asset('storage/' . $filePath); // 公開URLを生成
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('img/'), $filename);
+
+                // 公開URLを生成
+                $imageUrl = asset('img/' . $filename);
 
                 // データベースに保存
                 IdeaImage::create([
