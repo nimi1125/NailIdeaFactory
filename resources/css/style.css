@@ -109,6 +109,12 @@ img{
     background: #020d1263;
 }
 
+/* ideaItem */
+
+.postImgItem{
+    aspect-ratio: 1 / 1;
+}
+
 /* detail */
 
 .ideaDetails{

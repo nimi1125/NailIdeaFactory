@@ -2,7 +2,7 @@
     @foreach($ideas as $idea)   
     <div class="postArea bg-white overflow-hidden relative">
         <a href="{{ route('idea.detail',$idea) }}" class="postBox block">
-            <div class="postImgItme">
+            <div class="postImgItem">
                 @if ($idea->firstImage)
                     <img src="{{ asset($idea->firstImage->image_path) }}" alt="アイデア参考画像" class="w-full h-full object-cover">
                 @else
