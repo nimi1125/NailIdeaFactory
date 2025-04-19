@@ -33,7 +33,7 @@
     
                         @if (Route::has('login'))
                             <!-- ナビゲーションメニュー -->
-                            <nav class="flex flex-1 justify-end -mx-3 text-cyan-950">
+                            <nav class="hidden md:flex flex-1 justify-end -mx-3 text-cyan-950">
                                 @auth
                                     <a href="{{ url('/dashboard') }}" class="btn01 text-xs md:text-base px-3 md:px-10">マイページ</a>
                                 @else
