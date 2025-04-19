@@ -23,18 +23,18 @@
                     </div>
     
                     <div class="ideaContentArea mb-5">
-                        <h4 class="detail titH4 relative mb-2 inline-block font-semibold">Design Details<span class="text-sm ml-1 inline-block font-normal">デザイン詳細</span></h4>
+                        <h4 class="detail titH4 relative mb-2 inline-block font-semibold">デザイン詳細</h4>
                         <p class="text-2xl">{{ $idea->content ?? '' }}</p>
                     </div>
                     <hr class="mb-5">
 
                     <div class="idea-references mb-5">
-                        <h4 class="detail titH4 relative mb-2 inline-block font-semibold">Reference design<span class="text-sm ml-1 inline-block font-normal">参考デザイン</span></h4>
+                        <h4 class="detail titH4 relative mb-2 inline-block font-semibold">参考デザイン</h4>
                         @foreach ($idea->IdeaReferences as $reference)
                             <dl class="reference-block mb-2">
-                                <dt class="text-lg">Reference URL<span class="text-xs ml-1">参考URL</span></dt>
+                                <dt class="text-lg">参考デザインURL</dt>
                                 <dd class="hoverCol01"><a href="{{ $reference->url }}" target="_blank">{{ $reference->url }}</a></dd>
-                                <dt class="text-lg">Details<span class="text-xs ml-1">詳細</span></dt>
+                                <dt class="text-lg">参考デザインの説明</dt>
                                 <dd class="mb-2">{{ $reference->content ?? '説明なし' }}</dd>
                             </dl>
                         @endforeach
@@ -42,12 +42,12 @@
                     <hr class="mb-5">
     
                     <div class="idea-items mb-5">
-                        <h4 class="detail titH4 relative inline-block font-semibold">Items to Use<span class="text-sm ml-1 inline-block font-normal">使いたいアイテム</span></h4>
+                        <h4 class="detail titH4 relative inline-block font-semibold">使いたいアイテムについて</h4>
                         @foreach ($idea->IdeaItems as $item)
                             <dl class="item-block">
-                                <dt class="text-lg">Items URL<span class="text-xs ml-1">アイテムURL</span></dt>
+                                <dt class="text-lg">アイテムURL</dt>
                                 <dd class="hoverCol01"><a href="{{ $item->url }}" target="_blank">{{ $item->url }}</a></dd>
-                                <dt class="text-lg">Details<span class="text-xs ml-1">詳細</span></dt>
+                                <dt class="text-lg">アイテムの説明</dt>
                                 <dd class="mb-2">{{ $item->content ?? '説明なし' }}</dd>
                             </dl>
                         @endforeach
@@ -57,15 +57,15 @@
             </div>
         </div>
         <div class="btnArea max-w-7xl mx-auto mt-5 text-center">
-            <a href="{{ route('idea.index') }}" class="font-semibold text-2xl hoverCol01">back to the list<span class="text-xs ml-1">一覧に戻る</span></a>
+            <a href="{{ route('idea.index') }}" class="font-semibold text-2xl hoverCol01">一覧に戻る</a>
         </div>
         @if(Auth::id() === $idea->user->id )
             <div class="userBtnArea">
-                <a href="{{ route('idea.edit',$idea) }}" class="btn02 w-full text-center text-xl">Edit article<span class="text-xs ml-1">記事を編集</span></a>
+                <a href="{{ route('idea.edit',$idea) }}" class="btn02 w-full text-center">記事を編集</a>
                 <form action="{{ route('idea.destroy', $idea->id) }}" method="POST" onsubmit="return confirm('本当に削除しますか？');" class="w-full">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn01 w-full mt-5 text-xl">Delete article<span class="text-xs ml-1">記事を削除</span></button>
+                    <button type="submit" class="btn01 w-full mt-5">記事を削除</button>
                 </form>
             </div>
         @endif

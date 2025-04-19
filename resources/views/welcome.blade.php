@@ -35,11 +35,11 @@
                             <!-- ナビゲーションメニュー -->
                             <nav class="flex flex-1 justify-end -mx-3 text-cyan-950">
                                 @auth
-                                    <a href="{{ url('/dashboard') }}" class="btn01 text-xs md:text-base px-3 md:px-10">Dashboard</a>
+                                    <a href="{{ url('/dashboard') }}" class="btn01 text-xs md:text-base px-3 md:px-10">管理画面へ</a>
                                 @else
-                                    <a href="{{ route('login') }}" class="btn01  text-xs md:text-base px-3 md:px-10">Log in</a>
+                                    <a href="{{ route('login') }}" class="btn01  text-xs md:text-base px-3 md:px-10">ログイン</a>
                                     @if (Route::has('register'))
-                                        <a href="{{ route('register') }}" class="btn01 ml-3 text-xs md:text-base px-3 md:px-10">Register</a>
+                                        <a href="{{ route('register') }}" class="btn01 ml-3 text-xs md:text-base px-3 md:px-10">アカウント新規追加</a>
                                     @endif
                                 @endauth
                             </nav>
@@ -52,8 +52,8 @@
                             <h2 class="pattaya text-4xl md:text-7xl">Nail Idea Factory</h2>
                             <p class="mt-2">ネイルデザインのメモ帳</p>
                             <div class="flex mt-5 flex-col md:flex-row items-center md:items-start">
-                                <a href="{{ route('login') }}" class="btn01 text-center md:max-w-48 w-full">Log in</a>
-                                <a href="{{ route('register') }}" class="btn01 md:ml-3 md:mt-0 mt-5 md:max-w-48 w-full text-center">Register</a>
+                                <a href="{{ route('login') }}" class="btn01 text-center md:max-w-xs w-full">ログイン</a>
+                                <a href="{{ route('register') }}" class="btn01 md:ml-3 md:mt-0 mt-5 md:max-w-xs w-full text-center">アカウント新規追加</a>
                             </div>
                         </section>
                     </div>

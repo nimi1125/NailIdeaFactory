@@ -1,5 +1,5 @@
 <div class="mb-4">
-    <label class="text-2xl font-semibold mt-5 formLabel" for="title">Title<span class="text-sm ml-1 font-normal">題名</span></label>
+    <label class="text-2xl font-semibold mt-5 formLabel" for="title">題名<span class="text-sm ml-1 font-normal">アイディアの題名を登録</span></label>
     <input 
         type="text" 
         name="title" 
@@ -13,7 +13,7 @@
 </div>
 
 <div class="mb-4">
-    <label for="category_id" class="text-2xl font-semibold block formLabel">Category<span class="text-sm ml-1 font-normal">カテゴリ</span></label>
+    <label for="category_id" class="text-2xl font-semibold block formLabel">カテゴリ<span class="text-sm ml-1 font-normal">デザインのカテゴリを1つ選択</span></label>
     <select 
         id="category_id" 
         name="category_id" 
@@ -30,7 +30,7 @@
 </div>
 
 <div class="mb-4">
-    <label class="text-2xl font-semibold mt-5 inline-block formLabel" for="content">Design Details<span class="text-sm ml-1 font-normal inline-block">デザイン詳細</span></label>
+    <label class="text-2xl font-semibold mt-5 inline-block formLabel" for="content">デザイン詳細<span class="text-sm ml-1 font-normal inline-block">デザインの説明などを記載</span></label>
     <textarea 
         name="content" 
         id="content" 
@@ -43,7 +43,7 @@
 
 {{-- 画像 --}}
 <div class="mb-5">
-    <label for="image" class="text-2xl font-semibold block inline-block formLabel">Register reference image<span class="text-sm ml-1 font-normal inline-block">参考画像を登録</span></label>
+    <label for="image" class="text-2xl font-semibold block inline-block formLabel">参考画像<span class="text-sm ml-1 font-normal inline-block">完成イメージや参考にしたい画像やイラストなどを登録</span></label>
     @if(isset($idea) && $idea->ideaImages->isNotEmpty())
         {{-- 編集時のみ登録済み画像を表示 --}}
         <div class="mb-3">
@@ -79,7 +79,7 @@
 
 {{-- 参考情報 --}}
 <div id="references-container">
-    <label for="image" class="text-2xl font-semibold block inline-block formLabel">Reference design<span class="text-sm ml-1 font-normal inline-block">参考デザインについて登録</span></label>
+    <label for="image" class="text-2xl font-semibold block inline-block formLabel">参考デザインについて<span class="text-sm ml-1 font-normal inline-block">完成イメージや参考にしたいデザインのURL(InstagramのURLなど)を登録</span></label>
     @if(isset($idea) && $idea->IdeaReferences->isNotEmpty())
         @foreach ($idea->IdeaReferences as $index => $reference)
             @include('partials.reference', ['index' => $index, 'reference' => $reference])
@@ -93,7 +93,7 @@
 
 {{-- アイテム --}}
 <div id="items-container">
-    <label for="image" class="text-2xl font-semibold block inline-block formLabel">Items to Use<span class="text-sm ml-1 font-normal inline-block">使いたいアイテムについて登録</span></label>
+    <label for="image" class="text-2xl font-semibold block inline-block formLabel">使いたいアイテムについて<span class="text-sm ml-1 font-normal inline-block">ポリッシュ・ジェルネイル・パーツなど使いたいアイテムを登録</span></label>
     @if(isset($idea) && $idea->IdeaItems->isNotEmpty())
         @foreach ($idea->IdeaItems as $index => $IdeaItem)
             @include('partials.item', ['index' => $index, 'item' => $IdeaItem])
@@ -106,5 +106,5 @@
 
 {{-- 登録ボタン --}}
 <div class="mt-4">
-    <button type="submit" class="btn02 ml-3">Submit<span class="text-sm ml-1 font-normal inline-block">登録</span></button>
+    <button type="submit" class="btn02 ml-3">登録</button>
 </div>

@@ -50,4 +50,10 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Idea');
     }
+
+    // テストアカウント用
+    public function isTestAccount(): bool
+    {
+        return $this->email === 'yamadahanako@example.com';
+    }
 }

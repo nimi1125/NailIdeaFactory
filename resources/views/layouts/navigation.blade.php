@@ -13,16 +13,16 @@
                 <!-- Navigation Links -->
                 <div class="hidden pattayaRegular space-x-8 sm:-my-px sm:ms-10 md:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        Dashboard
+                        マイページ
                     </x-nav-link>
                     <x-nav-link :href="route('idea.index')" :active="request()->routeIs('idea.index')">
-                        Idea List
+                        アイディア一覧
                     </x-nav-link>
                     <x-nav-link :href="route('idea.myidea')" :active="request()->routeIs('idea.myidea')">
-                        My idea
+                        マイアイディア
                     </x-nav-link>
                     <x-nav-link :href="route('idea.create')" :active="request()->routeIs('idea.create')">
-                        New Idea Recored
+                        新規登録
                     </x-nav-link>
                 </div>
             </div>
@@ -43,9 +43,11 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
+                        @unless(auth()->user()->isTestAccount())
+                            <x-dropdown-link :href="route('profile.edit')">
+                                {{ __('Profile') }}
+                            </x-dropdown-link>
+                        @endunless
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
@@ -77,16 +79,16 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden md:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                Dashboard
+                マイページ
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('idea.index')" :active="request()->routeIs('idea.index')">
-                Idea List
+                アイディア一覧
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('idea.myidea')" :active="request()->routeIs('idea.myidea')">
-                My idea
+                マイアイディア
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('idea.create')" :active="request()->routeIs('idea.create')">
-                New Idea Recored
+                新規登録
             </x-responsive-nav-link>
         </div>
 
